@@ -112,19 +112,33 @@ async function actualizarContenidoConsulta() {
                 borderWidth: 1
             }];
         }
-        // CASO B: Consultas complejas con doble texto (1 y 2)
+    // CASO B: Consultas complejas con doble texto (1 y 2)
         else if (["1", "2"].includes(idSeleccionado)) {
-            // Unimos las dos columnas de texto para crear una etiqueta descriptiva perfecta (ej: "Enero - Programa X")
-            etiquetasEjeX = datosServidor.map(item => `${item[columnas[0]]} (${item[columnas[1]]})`);
-            const valores = datosServidor.map(item => item[columnas[2]]);
+            // Escudo anti-crash: Verifica si el servidor realmente mandó 3 columnas o más
+            if (columnas.length >= 3) {
+                etiquetasEjeX = datosServidor.map(item => `${item[columnas[0]]} (${item[columnas[1]]})`);
+                const valores = datosServidor.map(item => item[columnas[2]]);
 
-            listaDatasets = [{
-                label: columnas[2].toUpperCase(),
-                data: valores,
-                backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                borderColor: '#3b82f6',
-                borderWidth: 1
-            }];
+                listaDatasets = [{
+                    label: columnas[2].toUpperCase(),
+                    data: valores,
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
+                }];
+            } else {
+                // Si Java manda menos columnas por error, dibuja de forma simple sin colapsar
+                etiquetasEjeX = datosServidor.map(item => item[columnas[0]]);
+                const valores = datosServidor.map(item => item[columnas[1]]);
+
+                listaDatasets = [{
+                    label: (columnas[1] ? columnas[1].toUpperCase() : "TOTAL"),
+                    data: valores,
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
+                }];
+            }
         }
         // CASO C: Estructura Estándar (Un texto de categoría y una o varias métricas numéricas)
         else {
@@ -186,4 +200,82 @@ function ajustarColoresGrafico(colorTexto) {
     if (!miGrafico) return;
     miGrafico.options.plugins.legend.labels.color = colorTexto;
     miGrafico.update();
+}
+
+// --- FUNCIONALIDADES FUTURAS (roadmap para la sustentación) ---
+
+function exportarReportePDF() {
+    alert("Módulo de Impresión Activo:\nGenerando estructura vectorial del reporte...\n\nEstado: Funcionalidad de exportación automatizada programada para la siguiente fase de entrega (Librería iText/OpenPDF).");
+}
+
+function activarModuloIA() {
+    // Oculta las consultas estándar y muestra el entorno de IA para la demostración técnica
+    document.getElementById('moduloConsultas').style.display = 'none';
+    document.getElementById('panelGraficos').style.display = 'none';
+    document.getElementById('panelIA').style.display = 'block';
+    
+    // Activa la clase active en los menús de la barra lateral
+    const links = document.querySelectorAll('.nav-link');
+    links[0].classList.remove('active');
+    links[1].classList.add('active');
+}
+
+// Permitir regresar al panel principal si hace clic en Panel de Consultas
+document.querySelectorAll('.nav-link')[0].addEventListener('click', () => {
+    document.getElementById('moduloConsultas').style.display = 'block';
+    document.getElementById('panelGraficos').style.display = 'block';
+    document.getElementById('panelIA').style.display = 'none';
+    
+    const links = document.querySelectorAll('.nav-link');
+    links[1].classList.remove('active');
+    links[0].classList.add('active');
+    actualizarContenidoConsulta();
+});
+/*
+function ejecutarConsultaIA() {
+    alert("Procesando consulta en lenguaje natural...\nGenerando token sintáctico de base de datos...\n\nEstado: Conexión con el modelo Text-to-SQL en desarrollo.");
+}*/
+
+async function ejecutarConsultaIA() {
+    const pregunta = document.getElementById('preguntaIA').value;
+    if (!pregunta) {
+        alert("Por favor, escriba una consulta analítica.");
+        return;
+    }
+
+    const estadoDiv = document.getElementById('estadoIA');
+    estadoDiv.innerText = "Procesando lenguaje natural en Google Gemini y consultando Azure SQL...";
+    
+    try {
+        const urlIA = `https://covid-data-unasam-gwb2g3akcea5a0en.brazilsouth-01.azurewebsites.net/api/ia?q=${encodeURIComponent(pregunta)}`;
+        const respuesta = await fetch(urlIA);
+        const datosServidor = await respuesta.json();
+
+        if (datosServidor[0] && datosServidor[0].error) {
+            estadoDiv.innerHTML = `<span style="color:#ef4444;"><i class="fas fa-times"></i> ${datosServidor[0].error}</span>`;
+            return;
+        }
+
+        // Si hay éxito, mostramos los datos crudos devueltos por la IA
+        let htmlTabla = "<table border='1' style='width:100%; border-collapse: collapse; margin-top: 15px; color: var(--text-main);'>";
+        
+        // Cabeceras automáticas
+        const columnas = Object.keys(datosServidor[0]);
+        htmlTabla += "<tr style='background: var(--accent-color); color: white;'>";
+        columnas.forEach(col => htmlTabla += `<th style='padding: 8px;'>${col.toUpperCase()}</th>`);
+        htmlTabla += "</tr>";
+
+        // Filas automáticas
+        datosServidor.forEach(fila => {
+            htmlTabla += "<tr>";
+            columnas.forEach(col => htmlTabla += `<td style='padding: 8px; border: 1px solid var(--border-color);'>${fila[col]}</td>`);
+            htmlTabla += "</tr>";
+        });
+        htmlTabla += "</table>";
+
+        estadoDiv.innerHTML = `<span style="color:#10b981;"><i class="fas fa-check"></i> Consulta interpretada y ejecutada exitosamente.</span>` + htmlTabla;
+
+    } catch (error) {
+        estadoDiv.innerHTML = `<span style="color:#ef4444;"><i class="fas fa-wifi"></i> Error al conectar con el motor de Inteligencia Artificial en el servidor.</span>`;
+    }
 }

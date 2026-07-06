@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Warehouse - Ejecución de Gasto Público</title>
+    <title>Data Warehouse - Gasto Público</title>
     <link rel="stylesheet" href="stylo.css">
-    <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -27,6 +26,7 @@
         <div class="sidebar">
             <h2><i class="fas fa-database"></i> DW GASTO PÚBLICO</h2>
             <a href="#" class="nav-link active"><i class="fas fa-chart-pie"></i> Panel de Consultas</a>
+            <a href="#" class="nav-link" onclick="activarModuloIA()"><i class="fas fa-robot"></i> Asistente IA (Beta)</a>
             <a href="#" class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
         </div>
 
@@ -39,7 +39,7 @@
                 <button class="theme-toggle" id="themeBtn"><i class="fas fa-moon"></i> Modo Oscuro</button>
             </div>
 
-            <div class="card">
+            <div class="card" id="moduloConsultas">
                 <label class="selector-label">Seleccione el Indicador Presupuestal a Evaluar:</label>
                 <select class="selector-box" id="selectorConsultas" onchange="actualizarContenidoConsulta()">
                     <option value="1">Consulta 1: Gasto por Programa y Mes</option>
@@ -65,8 +65,11 @@
                 </select>
             </div>
 
-            <div class="card">
-                <h3 class="card-title" id="tituloDinamico">Consulta 1: Gasto por Programa y Mes</h3>
+            <div class="card" id="panelGraficos">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 class="card-title" id="tituloDinamico" style="margin: 0;">Consulta 1: Gasto por Programa y Mes</h3>
+                    <button class="login-btn" onclick="exportarReportePDF()" style="margin: 0; width: auto; padding: 8px 15px; background: #ef4444;"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+                </div>
                 <div class="query-container">
                     <div class="chart-box">
                         <canvas id="graficoDinamico"></canvas>
@@ -77,9 +80,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card" id="panelIA" style="display: none;">
+                <h3 class="card-title"><i class="fas fa-robot"></i> Consultas Predictivas con Inteligencia Artificial (Fase 2)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Interrogue al Data Warehouse utilizando lenguaje natural estructurado (Text-to-SQL).</p>
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" id="preguntaIA" class="selector-box" style="margin: 0;" placeholder="Ej: ¿Cuál es el gasto total acumulado en Ancash para el programa de educación?" >
+                    <button class="login-btn" onclick="ejecutarConsultaIA()" style="margin: 0; width: auto; white-space: nowrap;"><i class="fas fa-paper-plane"></i> Consultar IA</button>
+                </div>
+                <div class="interpretation-box" style="background-color: rgba(139, 92, 246, 0.08); border-left-color: #8b5cf6;">
+                    <h4 style="color: #8b5cf6;"><i class="fas fa-code"></i> Estado de la Arquitectura de IA</h4>
+                    <p id="estadoIA">Módulo base mapeado en backend (`App.java`). Interfaz en fase de acoplamiento seguro de API Key mediante variables de entorno en Azure App Service.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    
+    <script src="app.js?version=3" defer></script>
 </body>
 </html>

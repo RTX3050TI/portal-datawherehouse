@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Warehouse - Ejecución de Gasto Público</title>
+    <link rel="stylesheet" href="stylo.css">
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <i class="fas fa-shield-alt login-icon"></i>
+            <h2>Control de Acceso</h2>
+            <p class="login-subtitle">Autenticación para el Data Warehouse Institucional</p>
+            <input type="text" id="userInput" placeholder="Usuario de Gestión">
+            <input type="password" id="passInput" placeholder="Contraseña">
+            <button class="login-btn" onclick="validarAcceso()">Ingresar al Sistema</button>
+            <div class="login-error" id="loginError">Credenciales incorrectas. Intente de nuevo.</div>
+        </div>
+    </div>
+
+    <div class="app-container" id="appContainer">
+        <div class="sidebar">
+            <h2><i class="fas fa-database"></i> DW GASTO PÚBLICO</h2>
+            <a href="#" class="nav-link active"><i class="fas fa-chart-pie"></i> Panel de Consultas</a>
+            <a href="#" class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <div>
+                    <h1>Módulo de Inteligencia de Negocios</h1>
+                    <p class="header-subtitle">Análisis analítico de presupuestos y metas financieras en la nube</p>
+                </div>
+                <button class="theme-toggle" id="themeBtn"><i class="fas fa-moon"></i> Modo Oscuro</button>
+            </div>
+
+            <div class="card">
+                <label class="selector-label">Seleccione el Indicador Presupuestal a Evaluar:</label>
+                <select class="selector-box" id="selectorConsultas" onchange="actualizarContenidoConsulta()">
+                    <option value="1">Consulta 1: Gasto por Programa y Mes</option>
+                    <option value="2">Consulta 2: Ejecución Financiera por Entidad y Año</option>
+                    <option value="3">Consulta 3: Ejecución por Fuente de Financiamiento</option>
+                    <option value="4">Consulta 4: Distribución de Gasto por Categoría</option>
+                    <option value="5">Consulta 5: Balance de Devengado vs Pagado por Mes</option>
+                    <option value="6">Consulta 6: Presupuesto No Ejecutado (Brecha por Entidad)</option>
+                    <option value="7">Consulta 7: Top 10 Programas con Mayor Brecha Presupuestal</option>
+                    <option value="8">Consulta 8: Departamentos con Menor Nivel de Ejecución</option>
+                    <option value="9">Consulta 9: Comparativa de Certificado vs Devengado por Año</option>
+                    <option value="10">Consulta 10: Flujo de Transición: Certificado ➔ Comprometido</option>
+                    <option value="11">Consulta 11: Flujo de Transición: Comprometido ➔ Devengado</option>
+                    <option value="12">Consulta 12: Flujo de Transición: Devengado ➔ Pagado</option>
+                    <option value="13">Consulta 13: Análisis de Diferencias Entre Fases de Gasto</option>
+                    <option value="14">Consulta 14: Distribución General del Gasto por Departamento</option>
+                    <option value="15">Consulta 15: Top 10 Departamentos con Mayor Inversión</option>
+                    <option value="16">Consulta 16: Análisis de Ejecución Presupuestal por Provincias</option>
+                    <option value="17">Consulta 17: Top 10 Distritos con Menor Ejecución de Gasto</option>
+                    <option value="18">Consulta 18: Consolidado de Gasto por Programa Presupuestal</option>
+                    <option value="19">Consulta 19: Top 10 Productos/Proyectos con Mayor Gasto</option>
+                    <option value="20">Consulta 20: Distribución de Gasto por Función del Estado</option>
+                </select>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title" id="tituloDinamico">Consulta 1: Gasto por Programa y Mes</h3>
+                <div class="query-container">
+                    <div class="chart-box">
+                        <canvas id="graficoDinamico"></canvas>
+                    </div>
+                    <div class="interpretation-box">
+                        <h4><i class="fas fa-lightbulb"></i> Interpretación Técnica (Data Warehouse)</h4>
+                        <p id="interpretacionDinamica">Cargando análisis analítico...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

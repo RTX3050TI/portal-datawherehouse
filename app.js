@@ -7,13 +7,12 @@ function validarAcceso() {
     const user = document.getElementById('userInput').value;
     const pass = document.getElementById('passInput').value;
     
-    // Credenciales seguras para la presentación académica
     if (user === "admin" && pass === "unasam2026") {
         document.getElementById('loginOverlay').style.opacity = "0";
         setTimeout(() => {
             document.getElementById('loginOverlay').style.display = "none";
             document.getElementById('appContainer').style.display = "flex";
-            actualizarContenidoConsulta(); // Carga la primera consulta automáticamente
+            actualizarContenidoConsulta(); 
         }, 500);
     } else {
         document.getElementById('loginError').style.display = "block";
@@ -38,9 +37,9 @@ themeBtn.addEventListener('click', () => {
     }
 });
 
-// --- BANCO DE CONFIGURACIONES VISUALES FIJAS (DICCIONARIO DE CONSULTAS) ---
+// --- DICCIONARIO DE CONFIGURACIONES VISUALES ---
 const diccionarioConsultas = {
-    "1": { tipo: "line", interpretacion: "Muestra el comportamiento temporal del gasto mensual por programa. Permite identificar estacionalidades y picos de ejecución de presupuesto a lo largo del año." },
+    "1": { tipo: "bar", interpretacion: "Muestra el comportamiento temporal del gasto mensual por programa. Permite identificar estacionalidades y picos de ejecución de presupuesto a lo largo del año." },
     "2": { tipo: "bar", interpretacion: "Compara los niveles consolidados de ejecución económica asignados a las diferentes unidades ejecutoras segmentadas de forma anual." },
     "3": { tipo: "bar", interpretacion: "Analiza el comportamiento simultáneo de los montos Certificados, Devengados y Pagados, correlacionados de acuerdo a la Fuente de Financiamiento." },
     "4": { tipo: "pie", interpretacion: "Ilustra la distribución porcentual de los recursos financieros públicos distribuidos por cada categoría de gasto específica." },
@@ -62,45 +61,38 @@ const diccionarioConsultas = {
     "20": { tipo: "pie", interpretacion: "Agrupación final de los gastos de acuerdo a los propósitos socioeconómicos y funciones específicas del Estado (Salud, Educación, Orden Público)." }
 };
 
-// --- PROCESADOR UNIVERSAL DE PETICIONES Y CONEXIÓN CON AZURE ---
+// --- PROCESADOR ADAPTATIVO INTELIGENTE DE DATOS ---
 async function actualizarContenidoConsulta() {
     const idSeleccionado = document.getElementById('selectorConsultas').value;
     const selectorElement = document.getElementById('selectorConsultas');
     const textoOpcion = selectorElement.options[selectorElement.selectedIndex].text;
     
-    // Configuración visual por defecto
-    const datosFijos = diccionarioConsultas[idSeleccionado] || { tipo: "bar", interpretacion: "Análisis dimensional genérico." };
+    const datosFijos = diccionarioConsultas[idSeleccionado] || { tipo: "bar", interpretacion: "Análisis dimensional." };
 
     document.getElementById('tituloDinamico').innerText = textoOpcion;
     document.getElementById('interpretacionDinamica').innerText = datosFijos.interpretacion;
 
     try {
-        // Petición dinámica a tu servidor web de Java en Azure
         const urlApi = `https://covid-data-unasam-gwb2g3akcea5a0en.brazilsouth-01.azurewebsites.net/api/casos?id=${idSeleccionado}`;
         const respuesta = await fetch(urlApi);
         const datosServidor = await respuesta.json();
 
-        // Manejo de errores SQL devueltos por el backend
         if (datosServidor[0] && datosServidor[0].error) {
-            console.error("Error de Base de Datos:", datosServidor[0].error);
+            console.error("Error BD:", datosServidor[0].error);
             document.getElementById('interpretacionDinamica').innerHTML = `<span style="color:#ef4444; font-weight:bold;"><i class="fas fa-exclamation-triangle"></i> Error en Azure SQL: ${datosServidor[0].error}</span>`;
             return;
         }
 
         if (datosServidor.length === 0) {
-            document.getElementById('interpretacionDinamica').innerHTML = "<span style='color:#f59e0b;'><i class='fas fa-info-circle'></i> Consulta ejecutada con éxito pero sin registros de datos disponibles en esta dimensión.</span>";
+            document.getElementById('interpretacionDinamica').innerHTML = "<span style='color:#f59e0b;'><i class='fas fa-info-circle'></i> Consulta sin registros de datos disponibles.</span>";
             return;
         }
 
-        // --- MAPEADOR INTELIGENTE POR METADATOS ---
+        // --- MOTOR DE DETECCIÓN Y ARREGLO DE DIMENSIONES ---
         const columnas = Object.keys(datosServidor[0]);
-        const columnaEtiqueta = columnas[0]; // La primera columna siempre será el Eje X (Texto)
-        const columnasMetricas = columnas.slice(1); // Las columnas siguientes serán el Eje Y (Números)
+        let etiquetasEjeX = [];
+        let listaDatasets = [];
 
-        // Extraer etiquetas del eje X
-        const etiquetasEjeX = datosServidor.map(item => item[columnaEtiqueta]);
-
-        // Paleta de colores institucionales desaturados
         const paletaColores = [
             { bg: 'rgba(59, 130, 246, 0.7)', border: '#3b82f6' }, // Azul
             { bg: 'rgba(16, 185, 129, 0.7)', border: '#10b981' }, // Verde
@@ -108,26 +100,59 @@ async function actualizarContenidoConsulta() {
             { bg: 'rgba(245, 158, 11, 0.7)', border: '#f59e0b' }   // Ámbar
         ];
 
-        // Crear dinámicamente un dataset por cada métrica numérica que devuelva el SQL
-        const listaDatasets = columnasMetricas.map((columna, idx) => {
-            const color = paletaColores[idx % paletaColores.length];
-            return {
-                label: columna.toUpperCase(),
-                data: datosServidor.map(item => item[columna]),
-                backgroundColor: (datosFijos.tipo === 'doughnut' || datosFijos.tipo === 'pie')
-                    ? ['#3b82f6', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6', '#ec4899', '#14b8a6']
-                    : color.bg,
-                borderColor: color.border,
-                borderWidth: 1,
-                fill: datosFijos.tipo === 'line',
-                tension: 0.3
-            };
-        });
+        // CASO A: Consultas de transición o agregación sin texto (10, 11, 12, 13)
+        if (["10", "11", "12", "13"].includes(idSeleccionado)) {
+            etiquetasEjeX = columnas.map(col => col.toUpperCase());
+            const valores = columnas.map(col => datosServidor[0][col]);
 
-        // Destruir el gráfico anterior para evitar la superposición visual
+            listaDatasets = [{
+                label: "Monto Ejecutado S/.",
+                data: valores,
+                backgroundColor: ['#3b82f6', '#10b981', '#ef4444', '#f59e0b'],
+                borderWidth: 1
+            }];
+        }
+        // CASO B: Consultas complejas con doble texto (1 y 2)
+        else if (["1", "2"].includes(idSeleccionado)) {
+            // Unimos las dos columnas de texto para crear una etiqueta descriptiva perfecta (ej: "Enero - Programa X")
+            etiquetasEjeX = datosServidor.map(item => `${item[columnas[0]]} (${item[columnas[1]]})`);
+            const valores = datosServidor.map(item => item[columnas[2]]);
+
+            listaDatasets = [{
+                label: columnas[2].toUpperCase(),
+                data: valores,
+                backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                borderColor: '#3b82f6',
+                borderWidth: 1
+            }];
+        }
+        // CASO C: Estructura Estándar (Un texto de categoría y una o varias métricas numéricas)
+        else {
+            const columnaEtiqueta = columnas[0];
+            // Filtrar solo las columnas que contengan valores verdaderamente numéricos
+            const columnasMetricas = columnas.filter((col, idx) => idx > 0 && typeof datosServidor[0][col] === 'number');
+
+            etiquetasEjeX = datosServidor.map(item => item[columnaEtiqueta]);
+
+            listaDatasets = columnasMetricas.map((columna, idx) => {
+                const color = paletaColores[idx % paletaColores.length];
+                return {
+                    label: columna.toUpperCase(),
+                    data: datosServidor.map(item => item[columna]),
+                    backgroundColor: (datosFijos.tipo === 'doughnut' || datosFijos.tipo === 'pie')
+                        ? ['#3b82f6', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6', '#ec4899', '#14b8a6']
+                        : color.bg,
+                    borderColor: color.border,
+                    borderWidth: 1,
+                    fill: datosFijos.tipo === 'line',
+                    tension: 0.3
+                };
+            });
+        }
+
+        // --- RENDERIZADO EN CHART.JS ---
         if (miGrafico) miGrafico.destroy();
 
-        // Construir el nuevo gráfico de Chart.js con la estructura procesada
         const ctx = document.getElementById('graficoDinamico').getContext('2d');
         miGrafico = new Chart(ctx, {
             type: datosFijos.tipo,
@@ -152,12 +177,11 @@ async function actualizarContenidoConsulta() {
         });
 
     } catch (error) {
-        console.error("Error de Red:", error);
-        document.getElementById('interpretacionDinamica').innerHTML = "<span style='color:#ef4444;'><i class='fas fa-wifi'></i> Error crítico de comunicación con la API de Azure App Service. Verifique que el servidor esté activo.</span>";
+        console.error("Error Red:", error);
+        document.getElementById('interpretacionDinamica').innerHTML = "<span style='color:#ef4444;'><i class='fas fa-wifi'></i> Error de comunicación con la API de Azure App Service.</span>";
     }
 }
 
-// Función auxiliar para re-adaptar los colores si se cambia el tema
 function ajustarColoresGrafico(colorTexto) {
     if (!miGrafico) return;
     miGrafico.options.plugins.legend.labels.color = colorTexto;

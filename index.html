@@ -3,100 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Warehouse - Gasto Público</title>
+    <title>SEGEP UNASAM - Sistema Inteligente</title>
+    
+    <!-- Fuentes de Google (Inter para un diseño moderno y limpio) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Íconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Enlace a tu archivo CSS separado -->
     <link rel="stylesheet" href="stylo.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-    <div class="login-overlay" id="loginOverlay">
-        <div class="login-card">
-            <i class="fas fa-shield-alt login-icon"></i>
-            <h2>Control de Acceso</h2>
-            <p class="login-subtitle">Autenticación para el Data Warehouse Institucional</p>
-            <input type="text" id="userInput" placeholder="Usuario de Gestión">
-            <input type="password" id="passInput" placeholder="Contraseña">
-            <button class="login-btn" onclick="validarAcceso()">Ingresar al Sistema</button>
-            <div class="login-error" id="loginError">Credenciales incorrectas. Intente de nuevo.</div>
+    <!-- ==========================================
+         CAPA 1: FONDO ANIMADO
+         ========================================== -->
+    <div id="animated-bg"></div>
+
+    <!-- ==========================================
+         CAPA 2: PANTALLA DE ACCESO (LOGIN MOCKUP)
+         ========================================== -->
+    <div id="login-screen">
+        <div class="login-box">
+            <div class="login-logo">
+                <i class="fas fa-chart-line"></i>
+                <h2>SEGEP <span>UNASAM</span></h2>
+                <p data-lang="login-subtitle">Inteligencia de Negocios</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="login-user" placeholder="Usuario / Correo Institucional" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-pass" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" id="btn-login">
+                    <span data-lang="login-btn">Ingresar al Sistema</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+            <div id="login-spinner" class="hidden">
+                <i class="fas fa-circle-notch fa-spin"></i> <span data-lang="login-loading">Autenticando en Azure...</span>
+            </div>
         </div>
     </div>
 
-    <div class="app-container" id="appContainer">
-        <div class="sidebar">
-            <h2><i class="fas fa-database"></i> DW GASTO PÚBLICO</h2>
-            <a href="#" class="nav-link active"><i class="fas fa-chart-pie"></i> Panel de Consultas</a>
-            <a href="#" class="nav-link" onclick="activarModuloIA()"><i class="fas fa-robot"></i> Asistente IA (Beta)</a>
-            <a href="#" class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
-        </div>
+    <!-- ==========================================
+         CAPA 3: SISTEMA PRINCIPAL (OCULTO AL INICIO)
+         ========================================== -->
+    <div id="main-system" class="hidden">
 
-        <div class="main-content">
-            <div class="header">
-                <div>
-                    <h1>Módulo de Inteligencia de Negocios</h1>
-                    <p class="header-subtitle">Análisis analítico de presupuestos y metas financieras en la nube</p>
+        <!-- BARRA SUPERIOR (TOPBAR) -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <div class="logo-container">
+                    <i class="fas fa-layer-group"></i>
+                    <h1>SEGEP</h1>
                 </div>
-                <button class="theme-toggle" id="themeBtn"><i class="fas fa-moon"></i> Modo Oscuro</button>
+                <div class="online-status" title="Servidor Azure en línea">
+                    <div class="status-dot"></div>
+                    <span data-lang="status-online">Online</span>
+                </div>
             </div>
 
-            <div class="card" id="moduloConsultas">
-                <label class="selector-label">Seleccione el Indicador Presupuestal a Evaluar:</label>
-                <select class="selector-box" id="selectorConsultas" onchange="actualizarContenidoConsulta()">
-                    <option value="1">Consulta 1: Gasto por Programa y Mes</option>
-                    <option value="2">Consulta 2: Ejecución Financiera por Entidad y Año</option>
-                    <option value="3">Consulta 3: Ejecución por Fuente de Financiamiento</option>
-                    <option value="4">Consulta 4: Distribución de Gasto por Categoría</option>
-                    <option value="5">Consulta 5: Balance de Devengado vs Pagado por Mes</option>
-                    <option value="6">Consulta 6: Presupuesto No Ejecutado (Brecha por Entidad)</option>
-                    <option value="7">Consulta 7: Top 10 Programas con Mayor Brecha Presupuestal</option>
-                    <option value="8">Consulta 8: Departamentos con Menor Nivel de Ejecución</option>
-                    <option value="9">Consulta 9: Comparativa de Certificado vs Devengado por Año</option>
-                    <option value="10">Consulta 10: Flujo de Transición: Certificado ➔ Comprometido</option>
-                    <option value="11">Consulta 11: Flujo de Transición: Comprometido ➔ Devengado</option>
-                    <option value="12">Consulta 12: Flujo de Transición: Devengado ➔ Pagado</option>
-                    <option value="13">Consulta 13: Análisis de Diferencias Entre Fases de Gasto</option>
-                    <option value="14">Consulta 14: Distribución General del Gasto por Departamento</option>
-                    <option value="15">Consulta 15: Top 10 Departamentos con Mayor Inversión</option>
-                    <option value="16">Consulta 16: Análisis de Ejecución Presupuestal por Provincias</option>
-                    <option value="17">Consulta 17: Top 10 Distritos con Menor Ejecución de Gasto</option>
-                    <option value="18">Consulta 18: Consolidado de Gasto por Programa Presupuestal</option>
-                    <option value="19">Consulta 19: Top 10 Productos/Proyectos con Mayor Gasto</option>
-                    <option value="20">Consulta 20: Distribución de Gasto por Función del Estado</option>
-                </select>
-            </div>
+            <nav class="topbar-center" id="view-selector">
+                <button class="nav-btn active" data-target="view-bi">
+                    <i class="fas fa-chart-pie"></i> <span data-lang="nav-bi">Dashboard BI</span>
+                </button>
+                <button class="nav-btn" data-target="view-ia">
+                    <i class="fas fa-robot"></i> <span data-lang="nav-ia">Asistente IA</span>
+                </button>
+                <button class="nav-btn" data-target="view-about">
+                    <i class="fas fa-info-circle"></i> <span data-lang="nav-about">Acerca de</span>
+                </button>
+                <button class="nav-btn" data-target="view-contact">
+                    <i class="fas fa-headset"></i> <span data-lang="nav-contact">Mesa de Ayuda</span>
+                </button>
+            </nav>
 
-            <div class="card" id="panelGraficos">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 class="card-title" id="tituloDinamico" style="margin: 0;">Consulta 1: Gasto por Programa y Mes</h3>
-                    <button class="login-btn" onclick="exportarReportePDF()" style="margin: 0; width: auto; padding: 8px 15px; background: #ef4444;"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+            <div class="topbar-right">
+                <button id="btn-config" title="Configuraciones">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- PANEL LATERAL DE CONFIGURACIÓN -->
+        <aside id="config-panel" class="config-panel-hidden">
+            <div class="config-header">
+                <h3><i class="fas fa-sliders-h"></i> <span data-lang="config-title">Configuración</span></h3>
+                <button id="btn-close-config"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="config-body">
+                <!-- Idiomas -->
+                <div class="config-group">
+                    <label data-lang="config-lang">Idioma del Sistema</label>
+                    <select id="lang-selector">
+                        <option value="es">Español</option>
+                        <option value="qu">Quechua (Runasimi)</option>
+                        <option value="en">English</option>
+                        <option value="pt">Português</option>
+                        <option value="fr">Français</option>
+                    </select>
                 </div>
-                <div class="query-container">
-                    <div class="chart-box">
-                        <canvas id="graficoDinamico"></canvas>
+
+                <!-- Temas Poéticos -->
+                <div class="config-group">
+                    <label data-lang="config-theme">Temas de Entorno</label>
+                    <div class="theme-grid">
+                        <button class="theme-btn" data-theme="azure-blue" title="Azure Blue"></button>
+                        <button class="theme-btn" data-theme="midnight" title="Midnight"></button>
+                        <button class="theme-btn" data-theme="galaxy" title="Galaxy"></button>
+                        <button class="theme-btn" data-theme="emerald" title="Emerald"></button>
+                        <button class="theme-btn" data-theme="solar" title="Solar"></button>
+                        <button class="theme-btn" data-theme="crimson" title="Crimson"></button>
+                        <button class="theme-btn" data-theme="arctic-ice" title="Arctic Ice"></button>
+                        <button class="theme-btn" data-theme="ocean" title="Ocean"></button>
+                        <button class="theme-btn" data-theme="cyber-neon" title="Cyber Neon"></button>
+                        <button class="theme-btn" data-theme="aurora" title="Aurora"></button>
                     </div>
-                    <div class="interpretation-box">
-                        <h4><i class="fas fa-lightbulb"></i> Interpretación Técnica (Data Warehouse)</h4>
-                        <p id="interpretacionDinamica">Cargando análisis analítico...</p>
+                </div>
+
+                <!-- Rendimiento -->
+                <div class="config-group">
+                    <label data-lang="config-perf">Efectos Visuales</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="toggle-animations" checked>
+                        <label for="toggle-animations"></label>
                     </div>
                 </div>
-            </div>
 
-            <div class="card" id="panelIA" style="display: none;">
-                <h3 class="card-title"><i class="fas fa-robot"></i> Consultas Predictivas con Inteligencia Artificial (Fase 2)</h3>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Interrogue al Data Warehouse utilizando lenguaje natural estructurado (Text-to-SQL).</p>
-                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                    <input type="text" id="preguntaIA" class="selector-box" style="margin: 0;" placeholder="Ej: ¿Cuál es el gasto total acumulado en Ancash para el programa de educación?" >
-                    <button class="login-btn" onclick="ejecutarConsultaIA()" style="margin: 0; width: auto; white-space: nowrap;"><i class="fas fa-paper-plane"></i> Consultar IA</button>
-                </div>
-                <div class="interpretation-box" style="background-color: rgba(139, 92, 246, 0.08); border-left-color: #8b5cf6;">
-                    <h4 style="color: #8b5cf6;"><i class="fas fa-code"></i> Estado de la Arquitectura de IA</h4>
-                    <p id="estadoIA">Módulo base mapeado en backend (`App.java`). Interfaz en fase de acoplamiento seguro de API Key mediante variables de entorno en Azure App Service.</p>
-                </div>
+                <!-- Cerrar Sesión -->
+                <button id="btn-logout" class="btn-danger">
+                    <i class="fas fa-sign-out-alt"></i> <span data-lang="config-logout">Cerrar Sesión</span>
+                </button>
             </div>
+        </aside>
 
-        </div>
+        <!-- CONTENEDOR PRINCIPAL DE VISTAS -->
+        <main id="workspace">
+
+            <!-- ZONA A: DASHBOARD BI -->
+            <section id="view-bi" class="view-section active">
+                <div class="view-header">
+                    <h2 data-lang="bi-title">Inteligencia de Negocios Corporativa</h2>
+                    <p data-lang="bi-desc">Visualización de reportes estructurales a través de Power BI / Looker.</p>
+                </div>
+                <div class="bi-container">
+                    <!-- Aquí irá tu iframe de Power BI o Looker -->
+                   <iframe title="powerbi" width="100%" height="100%" src="https://app.powerbi.com/view?r=eyJrIjoiMWRjOWVmMDctYmRhZi00OWNhLTk3ZDEtYjRiMzQ2NGFjYjQ2IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9&pageName=8fdf16155a01d808be5d" frameborder="0" allowFullScreen="true"></iframe>
+                </div>
+            </section>
+
+            <!-- ZONA B: ASISTENTE IA (AURA) -->
+            <section id="view-ia" class="view-section">
+                <div class="ia-wrapper">
+                    <div class="ia-suggestions">
+                        <button class="chip-btn" onclick="escribirConsulta('¿Cuál fue el PIM y Devengado del 2025?')">PIM vs Devengado 2025</button>
+                        <button class="chip-btn" onclick="escribirConsulta('Muestra el top 10 de distritos con mayor ejecución')">Top 10 Distritos</button>
+                        <button class="chip-btn" onclick="escribirConsulta('Compara los pagos girados por fuente de financiamiento')">Fuentes de Financiamiento</button>
+                    </div>
+
+                    <div class="search-container">
+                        <input type="text" id="ia-query" placeholder="Escribe tu consulta analítica para AURA..." autocomplete="off">
+                        <button id="btn-consultar-ia" onclick="procesarIAReal()">
+                            <i class="fas fa-paper-plane"></i> <span data-lang="ia-btn">Consultar</span>
+                        </button>
+                    </div>
+
+                    <div id="ia-loading" class="hidden">
+                        <div class="pulsing-brain"><i class="fas fa-brain"></i></div>
+                        <p data-lang="ia-loading-text">AURA está procesando los datos en SQL Server...</p>
+                    </div>
+
+                    <!-- Contenedor que será exportado a PDF -->
+                    <div id="ia-results" class="hidden">
+                        <div class="action-bar-results">
+                            <button class="btn-pdf" onclick="exportarPDF()">
+                                <i class="fas fa-file-pdf"></i> <span data-lang="ia-pdf">Exportar Auditoría</span>
+                            </button>
+                        </div>
+                        
+                        <div id="ia-text" class="ia-card text-card"></div>
+                        
+                        <div id="ia-chart-container" class="ia-card chart-card">
+                            <canvas id="ia-canvas"></canvas>
+                        </div>
+                        
+                        <div id="ia-tabla-contenedor" class="ia-card table-card"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ZONA C: ACERCA DE -->
+            <section id="view-about" class="view-section">
+                <div class="about-container">
+                    <h2 data-lang="about-title">Arquitectura del Sistema</h2>
+                    <div class="architecture-grid">
+                        <div class="arch-card">
+                            <i class="fas fa-database"></i>
+                            <h3>SQL Server</h3>
+                            <p>Modelo multidimensional tipo Estrella (Data Warehouse).</p>
+                        </div>
+                        <div class="arch-card">
+                            <i class="fab fa-java"></i>
+                            <h3>Java Backend</h3>
+                            <p>API REST nativa desplegada en Azure App Service.</p>
+                        </div>
+                        <div class="arch-card">
+                            <i class="fas fa-network-wired"></i>
+                            <h3>Gemini AI</h3>
+                            <p>LLM (Large Language Model) para Text-to-SQL y análisis autónomo.</p>
+                        </div>
+                        <div class="arch-card">
+                            <i class="fab fa-html5"></i>
+                            <h3>Frontend Dinámico</h3>
+                            <p>SPA asíncrono con temas personalizables e internacionalización.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ZONA D: MESA DE AYUDA / CONTACTO -->
+            <section id="view-contact" class="view-section">
+                <div class="contact-wrapper">
+                    <div class="contact-form-container">
+                        <h2 data-lang="contact-title">Mesa de Ayuda</h2>
+                        <form id="support-form">
+                            <input type="text" placeholder="Nombre completo" required>
+                            <input type="email" placeholder="Correo institucional" required>
+                            <select required>
+                                <option value="" disabled selected data-lang="contact-select">Seleccione el área de destino...</option>
+                                <option value="soporte">Soporte Técnico (Sistemas)</option>
+                                <option value="presupuesto">Oficina de Presupuesto</option>
+                                <option value="administracion">Administración General</option>
+                            </select>
+                            <textarea rows="4" placeholder="Describa su solicitud o problema..." required></textarea>
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-envelope"></i> <span data-lang="contact-send">Enviar Ticket</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-whatsapp">
+                        <div class="wa-card">
+                            <i class="fab fa-whatsapp wa-icon"></i>
+                            <h3>Soporte Inmediato</h3>
+                            <p>¿Necesitas asistencia urgente? Contáctame directamente vía WhatsApp.</p>
+                            <!-- Reemplaza el número con el tuyo -->
+                            <a href="https://wa.me/51999999999" target="_blank" class="btn-wa">Abrir Chat</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- PIE DE PÁGINA -->
+        <footer>
+            <p>&copy; 2026 SEGEP UNASAM - Sistema de Inteligencia de Negocios. <span data-lang="footer-rights">Todos los derechos reservados.</span></p>
+        </footer>
+
     </div>
 
-    <script src="app.js?version=3" defer></script>
+    <!-- ==========================================
+         LIBRERÍAS EXTERNAS Y SCRIPTS PROPIOS
+         ========================================== -->
+    <!-- Chart.js para los gráficos de la IA -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- HTML2PDF para exportar reportes de la IA a PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- Tu archivo lógico separado -->
+    <script src="app.js"></script>
 </body>
 </html>

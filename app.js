@@ -1,281 +1,434 @@
-// --- VARIABLES GLOBALES Y CONTROL DE INTERFAZ ---
-let miGrafico;
-const rootElement = document.documentElement;
-
-// --- VALIDACIÓN DE ACCESO (LOGIN) ---
-function validarAcceso() {
-    const user = document.getElementById('userInput').value;
-    const pass = document.getElementById('passInput').value;
-    
-    if (user === "admin" && pass === "unasam2026") {
-        document.getElementById('loginOverlay').style.opacity = "0";
-        setTimeout(() => {
-            document.getElementById('loginOverlay').style.display = "none";
-            document.getElementById('appContainer').style.display = "flex";
-            actualizarContenidoConsulta(); 
-        }, 500);
-    } else {
-        document.getElementById('loginError').style.display = "block";
+/* =========================================================================
+   1. DICCIONARIO DE TRADUCCIÓN (INTERNACIONALIZACIÓN DE LA INTERFAZ)
+   ========================================================================= */
+const LANGUAGES = {
+    es: {
+        "login-subtitle": "Inteligencia de Negocios",
+        "login-btn": "Ingresar al Sistema",
+        "login-loading": "Autenticando en Azure...",
+        "status-online": "Online",
+        "nav-bi": "Dashboard BI",
+        "nav-ia": "Asistente IA",
+        "nav-about": "Acerca de",
+        "nav-contact": "Mesa de Ayuda",
+        "config-title": "Configuración",
+        "config-lang": "Idioma del Sistema",
+        "config-theme": "Temas de Entorno",
+        "config-perf": "Efectos Visuales",
+        "config-logout": "Cerrar Sesión",
+        "bi-title": "Inteligencia de Negocios Corporativa",
+        "bi-desc": "Visualización de reportes estructurales a través de Power BI / Looker.",
+        "ia-btn": "Consultar",
+        "ia-loading-text": "AURA está procesando los datos en SQL Server...",
+        "ia-pdf": "Exportar Auditoría",
+        "about-title": "Arquitectura del Sistema",
+        "contact-title": "Mesa de Ayuda",
+        "contact-select": "Seleccione el área de destino...",
+        "contact-send": "Enviar Ticket",
+        "footer-rights": "Todos los derechos reservados."
+    },
+    qu: {
+        "login-subtitle": "Runa Yachay Kachay",
+        "login-btn": "Yaykuy Llikaman",
+        "login-loading": "Azure llikapi qatichkan...",
+        "status-online": "Kachkan",
+        "nav-bi": "Tukuypaq Mastari",
+        "nav-ia": "IA Yanapakuq",
+        "nav-about": "Ñuqanchikmanta",
+        "nav-contact": "Yanapakuy Manka",
+        "config-title": "Allichaykuna",
+        "config-lang": "Llika Rimay",
+        "config-theme": "Llimphi Hawakuna",
+        "config-perf": "Kuyuqkuna Rikchay",
+        "config-logout": "Lluqsiy",
+        "bi-title": "Hatun Ruraykunapa Mastarinin",
+        "bi-desc": "Power BI / Looker Studio nisqapi qatipay ruraykuna khaway.",
+        "ia-btn": "Tapuy",
+        "ia-loading-text": "AURA SQL Serverpi rurachkan...",
+        "ia-pdf": "Qatipayta PDFman Hurquy",
+        "about-title": "Llikapa Shukunin",
+        "contact-title": "Yanapakuy Manka",
+        "contact-select": "Mayman chayana akllay...",
+        "contact-send": "Willakuyta Apachiy",
+        "footer-rights": "Tukuy ruraykuna amachasqam."
+    },
+    en: {
+        "login-subtitle": "Business Intelligence",
+        "login-btn": "Sign In to System",
+        "login-loading": "Authenticating on Azure...",
+        "status-online": "Online",
+        "nav-bi": "BI Dashboard",
+        "nav-ia": "AI Assistant",
+        "nav-about": "About Project",
+        "nav-contact": "Help Desk",
+        "config-title": "Settings",
+        "config-lang": "System Language",
+        "config-theme": "Environment Themes",
+        "config-perf": "Visual Effects",
+        "config-logout": "Log Out",
+        "bi-title": "Corporate Business Intelligence",
+        "bi-desc": "Visualization of structural reports through Power BI / Looker.",
+        "ia-btn": "Query",
+        "ia-loading-text": "AURA is processing database on SQL Server...",
+        "ia-pdf": "Export Audit",
+        "about-title": "System Architecture",
+        "contact-title": "Help Desk",
+        "contact-select": "Select target department...",
+        "contact-send": "Send Ticket",
+        "footer-rights": "All rights reserved."
+    },
+    pt: {
+        "login-subtitle": "Inteligência de Negócios",
+        "login-btn": "Entrar no Sistema",
+        "login-loading": "Autenticando no Azure...",
+        "status-online": "Online",
+        "nav-bi": "Painel BI",
+        "nav-ia": "Assistente IA",
+        "nav-about": "Sobre o Projeto",
+        "nav-contact": "Mesa de Ajuda",
+        "config-title": "Configuração",
+        "config-lang": "Idioma do Sistema",
+        "config-theme": "Temas de Ambiente",
+        "config-perf": "Efeitos Visuais",
+        "config-logout": "Sair",
+        "bi-title": "Inteligência de Negócios Corporativa",
+        "bi-desc": "Visualização de relatórios estruturais através do Power BI / Looker.",
+        "ia-btn": "Consultar",
+        "ia-loading-text": "AURA está processando dados no SQL Server...",
+        "ia-pdf": "Exportar Auditoria",
+        "about-title": "Arquitetura do Sistema",
+        "contact-title": "Mesa de Ajuda",
+        "contact-select": "Selecione a área de destino...",
+        "contact-send": "Enviar Ticket",
+        "footer-rights": "Todos os direitos reservados."
+    },
+    fr: {
+        "login-subtitle": "Informatique Décisionnelle",
+        "login-btn": "Se Connecter",
+        "login-loading": "Authentification sur Azure...",
+        "status-online": "En ligne",
+        "nav-bi": "Tableau BI",
+        "nav-ia": "Assistant IA",
+        "nav-about": "À Propos",
+        "nav-contact": "Mesa d'Aide",
+        "config-title": "Configuration",
+        "config-lang": "Langue du Système",
+        "config-theme": "Thèmes d'Environnement",
+        "config-perf": "Effets Visuels",
+        "config-logout": "Se Déconnecter",
+        "bi-title": "Informatique Décisionnelle Corporative",
+        "bi-desc": "Visualisation des rapports structurels via Power BI / Looker.",
+        "ia-btn": "Consulter",
+        "ia-loading-text": "AURA traite les données sur SQL Server...",
+        "ia-pdf": "Exporter l'Audit",
+        "about-title": "Architecture du Système",
+        "contact-title": "Mesa d'Aide",
+        "contact-select": "Sélectionnez la zone cible...",
+        "contact-send": "Envoyer le Ticket",
+        "footer-rights": "Tous droits réservés."
     }
-}
-
-function logout() {
-    location.reload();
-}
-
-// --- CONTROL DE CAMBIO DE TEMA (MODO OSCURO) ---
-const themeBtn = document.getElementById('themeBtn');
-themeBtn.addEventListener('click', () => {
-    if (rootElement.getAttribute('data-theme') === 'dark') {
-        rootElement.removeAttribute('data-theme');
-        themeBtn.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
-        ajustarColoresGrafico('#64748b');
-    } else {
-        rootElement.setAttribute('data-theme', 'dark');
-        themeBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-        ajustarColoresGrafico('#94a3b8');
-    }
-});
-
-// --- DICCIONARIO DE CONFIGURACIONES VISUALES ---
-const diccionarioConsultas = {
-    "1": { tipo: "bar", interpretacion: "Muestra el comportamiento temporal del gasto mensual por programa. Permite identificar estacionalidades y picos de ejecución de presupuesto a lo largo del año." },
-    "2": { tipo: "bar", interpretacion: "Compara los niveles consolidados de ejecución económica asignados a las diferentes unidades ejecutoras segmentadas de forma anual." },
-    "3": { tipo: "bar", interpretacion: "Analiza el comportamiento simultáneo de los montos Certificados, Devengados y Pagados, correlacionados de acuerdo a la Fuente de Financiamiento." },
-    "4": { tipo: "pie", interpretacion: "Ilustra la distribución porcentual de los recursos financieros públicos distribuidos por cada categoría de gasto específica." },
-    "5": { tipo: "line", interpretacion: "Gráfico analítico de balance que contrasta el dinero reconocido administrativamente (Devengado) frente a lo efectivamente desembolsado (Pagado)." },
-    "6": { tipo: "bar", interpretacion: "Identifica los cuellos de botella institucionales, ordenando de mayor a menor las entidades con mayor presupuesto certificado retenido sin devengar." },
-    "7": { tipo: "bar", interpretacion: "Muestra las 10 estrategias programáticas con mayores saldos o brechas, exponiendo ineficiencias en la gestión de las metas físicas." },
-    "8": { tipo: "bar", interpretacion: "Mapeo geopolítico que resalta las regiones del territorio con menores índices de capacidad de gasto público acumulado." },
-    "9": { tipo: "bar", interpretacion: "Exposición evolutiva anual de la eficiencia de captación, comparando la reserva de recursos autorizados frente a su devengo final." },
-    "10": { tipo: "doughnut", interpretacion: "Métrica macro-estructural que evalúa el porcentaje de recursos reservados en fase de certificación que pasaron exitosamente a compromiso formal." },
-    "11": { tipo: "doughnut", interpretacion: "Analiza la fluidez del gasto público midiendo qué volumen del presupuesto comprometido cuenta con la conformidad de entrega del bien." },
-    "12": { tipo: "doughnut", interpretacion: "Muestra la velocidad de tesorería para honrar las obligaciones de pago de las planillas de obligaciones ya devengadas." },
-    "13": { tipo: "bar", interpretacion: "Gráfico de brechas puras que calcula los saldos retenidos en las transiciones de las fases administrativas de la ejecución financiera." },
-    "14": { tipo: "bar", interpretacion: "Clasificación descentralizada que mide la asignación de recursos públicos inyectados en los diferentes departamentos." },
-    "15": { tipo: "bar", interpretacion: "Filtro de visualización optimizado para concentrar el análisis exclusivamente en las 10 regiones con mayor densidad de inversión estatal." },
-    "16": { tipo: "bar", interpretacion: "Desglose territorial a nivel provincial que permite identificar focos específicos de concentración de capital y obras públicas." },
-    "17": { tipo: "bar", interpretacion: "Alerta de control interno que enumera las 10 municipalidades distritales con deficiencias críticas para ejecutar sus presupuestos." },
-    "18": { tipo: "bar", interpretacion: "Evaluación integral de la eficiencia presupuestaria ordenada de forma descendente por la nomenclatura de los programas." },
-    "19": { tipo: "bar", interpretacion: "Clasificación de impacto que audita los 10 proyectos de inversión pública u obras de infraestructura que demandaron el mayor presupuesto." },
-    "20": { tipo: "pie", interpretacion: "Agrupación final de los gastos de acuerdo a los propósitos socioeconómicos y funciones específicas del Estado (Salud, Educación, Orden Público)." }
 };
 
-// --- PROCESADOR ADAPTATIVO INTELIGENTE DE DATOS ---
-async function actualizarContenidoConsulta() {
-    const idSeleccionado = document.getElementById('selectorConsultas').value;
-    const selectorElement = document.getElementById('selectorConsultas');
-    const textoOpcion = selectorElement.options[selectorElement.selectedIndex].text;
+/* =========================================================================
+   2. VARIABLES E INSTANCIAS GLOBALES
+   ========================================================================= */
+let chartInstance = null; 
+
+/* =========================================================================
+   3. INICIALIZACIÓN COMPLETA DEL SISTEMA (DOM LOADED)
+   ========================================================================= */
+document.addEventListener("DOMContentLoaded", () => {
     
-    const datosFijos = diccionarioConsultas[idSeleccionado] || { tipo: "bar", interpretacion: "Análisis dimensional." };
+    const loginScreen = document.getElementById("login-screen");
+    const mainSystem = document.getElementById("main-system");
+    const loginForm = document.getElementById("login-form");
+    const loginSpinner = document.getElementById("login-spinner");
+    const btnLogin = document.getElementById("btn-login");
 
-    document.getElementById('tituloDinamico').innerText = textoOpcion;
-    document.getElementById('interpretacionDinamica').innerText = datosFijos.interpretacion;
+    // --- CARGAR DATOS DE MEMORIA NATIVA (SESIÓN, TEMA E IDIOMA) ---
+    
+    // Verificar si ya hay una sesión iniciada
+    if (localStorage.getItem("segep_session") === "activa") {
+        loginScreen.classList.add("hidden");
+        mainSystem.classList.remove("hidden");
+    }
 
-    try {
-        const urlApi = `https://covid-data-unasam-gwb2g3akcea5a0en.brazilsouth-01.azurewebsites.net/api/casos?id=${idSeleccionado}`;
-        const respuesta = await fetch(urlApi);
-        const datosServidor = await respuesta.json();
+    // Verificar si hay un tema guardado
+    const savedTheme = localStorage.getItem("segep_theme");
+    if (savedTheme && savedTheme !== "azure-blue") {
+        document.body.classList.add(savedTheme);
+    }
 
-        if (datosServidor[0] && datosServidor[0].error) {
-            console.error("Error BD:", datosServidor[0].error);
-            document.getElementById('interpretacionDinamica').innerHTML = `<span style="color:#ef4444; font-weight:bold;"><i class="fas fa-exclamation-triangle"></i> Error en Azure SQL: ${datosServidor[0].error}</span>`;
-            return;
-        }
+    // Verificar si hay un idioma guardado
+    const savedLang = localStorage.getItem("segep_lang");
+    if (savedLang) {
+        document.getElementById("lang-selector").value = savedLang;
+        setTimeout(() => document.getElementById("lang-selector").dispatchEvent(new Event('change')), 100);
+    }
 
-        if (datosServidor.length === 0) {
-            document.getElementById('interpretacionDinamica').innerHTML = "<span style='color:#f59e0b;'><i class='fas fa-info-circle'></i> Consulta sin registros de datos disponibles.</span>";
-            return;
-        }
+    // --- MANEJO DEL FORMULARIO DE ACCESO (LOGIN MOCKUP) ---
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        btnLogin.classList.add("hidden");
+        loginSpinner.classList.remove("hidden");
 
-        // --- MOTOR DE DETECCIÓN Y ARREGLO DE DIMENSIONES ---
-        const columnas = Object.keys(datosServidor[0]);
-        let etiquetasEjeX = [];
-        let listaDatasets = [];
+        // Simulación de conexión y verificación asíncrona
+        setTimeout(() => {
+            localStorage.setItem("segep_session", "activa"); // Guardar estado de sesión
+            loginScreen.classList.add("hidden");
+            mainSystem.classList.remove("hidden");
+            window.dispatchEvent(new Event('resize'));
+        }, 1500);
+    });
 
-        const paletaColores = [
-            { bg: 'rgba(59, 130, 246, 0.7)', border: '#3b82f6' }, // Azul
-            { bg: 'rgba(16, 185, 129, 0.7)', border: '#10b981' }, // Verde
-            { bg: 'rgba(239, 68, 68, 0.7)', border: '#ef4444' },  // Rojo
-            { bg: 'rgba(245, 158, 11, 0.7)', border: '#f59e0b' }   // Ámbar
-        ];
+    // --- NAVEGACIÓN SPA ENTRE SECCIONES ---
+    const navButtons = document.querySelectorAll(".nav-btn");
+    const viewSections = document.querySelectorAll(".view-section");
 
-        // CASO A: Consultas de transición o agregación sin texto (10, 11, 12, 13)
-        if (["10", "11", "12", "13"].includes(idSeleccionado)) {
-            etiquetasEjeX = columnas.map(col => col.toUpperCase());
-            const valores = columnas.map(col => datosServidor[0][col]);
+    navButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            navButtons.forEach(b => b.classList.remove("active"));
+            viewSections.forEach(s => s.classList.remove("active"));
 
-            listaDatasets = [{
-                label: "Monto Ejecutado S/.",
-                data: valores,
-                backgroundColor: ['#3b82f6', '#10b981', '#ef4444', '#f59e0b'],
-                borderWidth: 1
-            }];
-        }
-    // CASO B: Consultas complejas con doble texto (1 y 2)
-        else if (["1", "2"].includes(idSeleccionado)) {
-            // Escudo anti-crash: Verifica si el servidor realmente mandó 3 columnas o más
-            if (columnas.length >= 3) {
-                etiquetasEjeX = datosServidor.map(item => `${item[columnas[0]]} (${item[columnas[1]]})`);
-                const valores = datosServidor.map(item => item[columnas[2]]);
+            btn.classList.add("active");
+            const targetId = btn.getAttribute("data-target");
+            document.getElementById(targetId).classList.add("active");
+        });
+    });
 
-                listaDatasets = [{
-                    label: columnas[2].toUpperCase(),
-                    data: valores,
-                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                    borderColor: '#3b82f6',
-                    borderWidth: 1
-                }];
-            } else {
-                // Si Java manda menos columnas por error, dibuja de forma simple sin colapsar
-                etiquetasEjeX = datosServidor.map(item => item[columnas[0]]);
-                const valores = datosServidor.map(item => item[columnas[1]]);
+    // --- CONTROL DE PANEL LATERAL DE CONFIGURACIÓN ---
+    const btnConfig = document.getElementById("btn-config");
+    const btnCloseConfig = document.getElementById("btn-close-config");
+    const configPanel = document.getElementById("config-panel");
 
-                listaDatasets = [{
-                    label: (columnas[1] ? columnas[1].toUpperCase() : "TOTAL"),
-                    data: valores,
-                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                    borderColor: '#3b82f6',
-                    borderWidth: 1
-                }];
+    btnConfig.addEventListener("click", () => configPanel.classList.remove("config-panel-hidden"));
+    btnCloseConfig.addEventListener("click", () => configPanel.classList.add("config-panel-hidden"));
+
+    // --- MANEJO DE LOS 10 TEMAS DE ENTORNO ---
+    const themeButtons = document.querySelectorAll(".theme-btn");
+    themeButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.body.className = ""; // Limpiar clases
+            const selectedTheme = btn.getAttribute("data-theme");
+            
+            if (selectedTheme !== "azure-blue") {
+                document.body.classList.add(selectedTheme);
             }
+            
+            localStorage.setItem("segep_theme", selectedTheme); // Guardar tema en memoria
+            
+            if (!document.getElementById("toggle-animations").checked) {
+                document.body.classList.add("animations-off");
+            }
+        });
+    });
+
+    // --- INTERRUPTOR DE ANIMACIONES ---
+    const toggleAnimations = document.getElementById("toggle-animations");
+    toggleAnimations.addEventListener("change", () => {
+        if (toggleAnimations.checked) {
+            document.body.classList.remove("animations-off");
+        } else {
+            document.body.classList.add("animations-off");
         }
-        // CASO C: Estructura Estándar (Un texto de categoría y una o varias métricas numéricas)
-        else {
-            const columnaEtiqueta = columnas[0];
-            // Filtrar solo las columnas que contengan valores verdaderamente numéricos
-            const columnasMetricas = columnas.filter((col, idx) => idx > 0 && typeof datosServidor[0][col] === 'number');
+    });
 
-            etiquetasEjeX = datosServidor.map(item => item[columnaEtiqueta]);
-
-            listaDatasets = columnasMetricas.map((columna, idx) => {
-                const color = paletaColores[idx % paletaColores.length];
-                return {
-                    label: columna.toUpperCase(),
-                    data: datosServidor.map(item => item[columna]),
-                    backgroundColor: (datosFijos.tipo === 'doughnut' || datosFijos.tipo === 'pie')
-                        ? ['#3b82f6', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6', '#ec4899', '#14b8a6']
-                        : color.bg,
-                    borderColor: color.border,
-                    borderWidth: 1,
-                    fill: datosFijos.tipo === 'line',
-                    tension: 0.3
-                };
-            });
+    // --- RENDERIZADO DEL RESPLANDOR DEL MOUSE ---
+    window.addEventListener("mousemove", (e) => {
+        if (!document.body.classList.contains("animations-off")) {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+            document.documentElement.style.setProperty('--mouse-y', `${y}%`);
         }
+    });
 
-        // --- RENDERIZADO EN CHART.JS ---
-        if (miGrafico) miGrafico.destroy();
+    // --- TRADUCTOR MULTILINGÜE ---
+    const langSelector = document.getElementById("lang-selector");
+    langSelector.addEventListener("change", () => {
+        const selectedLang = langSelector.value;
+        const dictionary = LANGUAGES[selectedLang];
 
-        const ctx = document.getElementById('graficoDinamico').getContext('2d');
-        miGrafico = new Chart(ctx, {
-            type: datosFijos.tipo,
-            data: {
-                labels: etiquetasEjeX,
-                datasets: listaDatasets
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { 
-                        display: true,
-                        labels: { color: rootElement.getAttribute('data-theme') === 'dark' ? '#94a3b8' : '#64748b' } 
+        localStorage.setItem("segep_lang", selectedLang); // Guardar idioma en memoria
+
+        document.querySelectorAll("[data-lang]").forEach(element => {
+            const langKey = element.getAttribute("data-lang");
+            if (dictionary[langKey]) {
+                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+                    element.placeholder = dictionary[langKey];
+                } else {
+                    const icon = element.querySelector("i");
+                    if (icon) {
+                        element.innerHTML = "";
+                        element.appendChild(icon);
+                        element.removeAttribute("data-lang");
+                        element.innerHTML += " " + dictionary[langKey];
+                        element.setAttribute("data-lang", langKey);
+                    } else {
+                        element.textContent = dictionary[langKey];
                     }
-                },
-                scales: (datosFijos.tipo !== 'doughnut' && datosFijos.tipo !== 'pie') ? {
-                    x: { ticks: { color: '#64748b' }, grid: { color: 'rgba(0,0,0,0.03)' } },
-                    y: { ticks: { color: '#64748b' }, grid: { color: 'rgba(0,0,0,0.03)' } }
-                } : {}
+                }
             }
         });
+    });
 
-    } catch (error) {
-        console.error("Error Red:", error);
-        document.getElementById('interpretacionDinamica').innerHTML = "<span style='color:#ef4444;'><i class='fas fa-wifi'></i> Error de comunicación con la API de Azure App Service.</span>";
-    }
-}
+    // --- ENVÍO DE FORMULARIO DE SOPORTE MOCK ---
+    const supportForm = document.getElementById("support-form");
+    supportForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("¡Ticket enviado con éxito! Se procesará su solicitud a la brevedad.");
+        supportForm.reset();
+    });
 
-function ajustarColoresGrafico(colorTexto) {
-    if (!miGrafico) return;
-    miGrafico.options.plugins.legend.labels.color = colorTexto;
-    miGrafico.update();
-}
-
-// --- FUNCIONALIDADES FUTURAS (roadmap para la sustentación) ---
-
-function exportarReportePDF() {
-    alert("Módulo de Impresión Activo:\nGenerando estructura vectorial del reporte...\n\nEstado: Funcionalidad de exportación automatizada programada para la siguiente fase de entrega (Librería iText/OpenPDF).");
-}
-
-function activarModuloIA() {
-    // Oculta las consultas estándar y muestra el entorno de IA para la demostración técnica
-    document.getElementById('moduloConsultas').style.display = 'none';
-    document.getElementById('panelGraficos').style.display = 'none';
-    document.getElementById('panelIA').style.display = 'block';
-    
-    // Activa la clase active en los menús de la barra lateral
-    const links = document.querySelectorAll('.nav-link');
-    links[0].classList.remove('active');
-    links[1].classList.add('active');
-}
-
-// Permitir regresar al panel principal si hace clic en Panel de Consultas
-document.querySelectorAll('.nav-link')[0].addEventListener('click', () => {
-    document.getElementById('moduloConsultas').style.display = 'block';
-    document.getElementById('panelGraficos').style.display = 'block';
-    document.getElementById('panelIA').style.display = 'none';
-    
-    const links = document.querySelectorAll('.nav-link');
-    links[1].classList.remove('active');
-    links[0].classList.add('active');
-    actualizarContenidoConsulta();
+    // --- ALERTA DE CONFIRMACIÓN AL CERRAR SESIÓN ---
+    document.getElementById("btn-logout").addEventListener("click", () => {
+        // Alerta de dificultad antes de salir para evitar accidentes
+        const seguro = confirm("¡Atención! Está a punto de cerrar su sesión de trabajo seguro. ¿Desea abandonar el entorno analítico actual?");
+        if (seguro) {
+            localStorage.removeItem("segep_session"); // Eliminar clave de acceso
+            window.location.reload(); // Recargar para forzar pantalla de bloqueo
+        }
+    });
 });
-/*
-function ejecutarConsultaIA() {
-    alert("Procesando consulta en lenguaje natural...\nGenerando token sintáctico de base de datos...\n\nEstado: Conexión con el modelo Text-to-SQL en desarrollo.");
-}*/
 
-async function ejecutarConsultaIA() {
-    const pregunta = document.getElementById('preguntaIA').value;
-    if (!pregunta) {
-        alert("Por favor, escriba una consulta analítica.");
-        return;
+/* =========================================================================
+   4. MANEJO DE CONSULTAS A LA IA (ENTORNO LOCAL: NETBEANS)
+   ========================================================================= */
+
+function escribirConsulta(texto) {
+    document.getElementById("ia-query").value = texto;
+}
+
+async function procesarIAReal() {
+    const queryInput = document.getElementById("ia-query");
+    const query = queryInput.value.trim();
+    if (!query) return;
+
+    const resultsDiv = document.getElementById("ia-results");
+    const loadingDiv = document.getElementById("ia-loading");
+    const textDiv = document.getElementById("ia-text");
+    const tablaDiv = document.getElementById("ia-tabla-contenedor");
+    
+    resultsDiv.classList.add("hidden");
+    loadingDiv.classList.remove("hidden");
+    if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
     }
 
-    const estadoDiv = document.getElementById('estadoIA');
-    estadoDiv.innerText = "Procesando lenguaje natural en Google Gemini y consultando Azure SQL...";
-    
     try {
-        const urlIA = `https://covid-data-unasam-gwb2g3akcea5a0en.brazilsouth-01.azurewebsites.net/api/ia?q=${encodeURIComponent(pregunta)}`;
-        const respuesta = await fetch(urlIA);
-        const datosServidor = await respuesta.json();
+        // =============================================================
+        // CONFIGURADO PARA TU PRUEBA LOCAL DE HOY EN NETBEANS (PUERTO 8080)
+        // =============================================================
+       const urlAzure = `https://covid-data-unasam-gwb2g3akcea5a0en.brazilsouth-01.azurewebsites.net/api/ia?q=${encodeURIComponent(query)}`;
+        const respuesta = await fetch(urlAzure);
+        
+        if (!respuesta.ok) throw new Error(`Error en servidor de Azure: HTTP ${respuesta.status}`);
 
-        if (datosServidor[0] && datosServidor[0].error) {
-            estadoDiv.innerHTML = `<span style="color:#ef4444;"><i class="fas fa-times"></i> ${datosServidor[0].error}</span>`;
+        const paqueteIA = await respuesta.json();
+        
+        loadingDiv.classList.add("hidden");
+        resultsDiv.classList.remove("hidden");
+
+        if (paqueteIA.error) throw new Error(paqueteIA.error);
+
+        // A. Imprimir análisis de Lucía/AURA
+        textDiv.innerHTML = `<strong><i class="fas fa-brain" style="color: var(--primary);"></i> AURA:</strong> ${paqueteIA.analisis}`;
+
+        // B. Crear tabla dinámica con formato monetario para Soles
+        const datos = paqueteIA.datos;
+        if (!datos || datos.length === 0) {
+            tablaDiv.innerHTML = "<p style='padding: 20px;'>Consulta sin registros coincidentes.</p>";
+            document.getElementById('ia-chart-container').style.display = 'none';
             return;
         }
 
-        // Si hay éxito, mostramos los datos crudos devueltos por la IA
-        let htmlTabla = "<table border='1' style='width:100%; border-collapse: collapse; margin-top: 15px; color: var(--text-main);'>";
+        const columnas = Object.keys(datos[0]);
+        let htmlTabla = "<table class='tabla-ia'><thead><tr>";
+        columnas.forEach(col => htmlTabla += `<th>${col.replace(/_/g, ' ').toUpperCase()}</th>`);
+        htmlTabla += "</tr></thead><tbody>";
         
-        // Cabeceras automáticas
-        const columnas = Object.keys(datosServidor[0]);
-        htmlTabla += "<tr style='background: var(--accent-color); color: white;'>";
-        columnas.forEach(col => htmlTabla += `<th style='padding: 8px;'>${col.toUpperCase()}</th>`);
-        htmlTabla += "</tr>";
+        const formatoMoneda = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' });
 
-        // Filas automáticas
-        datosServidor.forEach(fila => {
-            htmlTabla += "<tr>";
-            columnas.forEach(col => htmlTabla += `<td style='padding: 8px; border: 1px solid var(--border-color);'>${fila[col]}</td>`);
-            htmlTabla += "</tr>";
+        datos.forEach(fila => { 
+            htmlTabla += "<tr>"; 
+            columnas.forEach(col => {
+                let valor = fila[col];
+                if (typeof valor === 'number' && 
+                    (col.toLowerCase().includes('monto') || col.toLowerCase().includes('total') || 
+                     col.toLowerCase().includes('pim') || col.toLowerCase().includes('pia') || 
+                     col.toLowerCase().includes('devengado') || col.toLowerCase().includes('girado'))) {
+                    valor = formatoMoneda.format(valor);
+                }
+                htmlTabla += `<td>${valor}</td>`;
+            }); 
+            htmlTabla += "</tr>"; 
         });
-        htmlTabla += "</table>";
+        htmlTabla += "</tbody></table>";
+        tablaDiv.innerHTML = htmlTabla;
 
-        estadoDiv.innerHTML = `<span style="color:#10b981;"><i class="fas fa-check"></i> Consulta interpretada y ejecutada exitosamente.</span>` + htmlTabla;
+        // C. Crear Gráfico adaptado cromáticamente al tema activo
+        if (columnas.length >= 2) {
+            document.getElementById('ia-chart-container').style.display = 'block';
+            const ctx = document.getElementById('ia-canvas').getContext('2d');
+            
+            const etiquetas = datos.map(item => item[columnas[0]]);
+            const valores = datos.map(item => item[columnas[columnas.length - 1]]);
+
+            const paletaColores = [
+                'rgba(37, 99, 235, 0.75)', 'rgba(139, 92, 246, 0.75)', 
+                'rgba(16, 185, 129, 0.75)', 'rgba(245, 158, 11, 0.75)', 
+                'rgba(239, 68, 68, 0.75)', 'rgba(6, 182, 212, 0.75)'
+            ];
+
+            const colorTextoDinamico = getComputedStyle(document.documentElement).getPropertyValue('--text-main').trim();
+
+            chartInstance = new Chart(ctx, {
+                type: paqueteIA.grafico,
+                data: {
+                    labels: etiquetas,
+                    datasets: [{
+                        label: columnas[columnas.length - 1].replace(/_/g, ' ').toUpperCase(),
+                        data: valores,
+                        backgroundColor: paqueteIA.grafico === 'bar' || paqueteIA.grafico === 'line' ? 'rgba(37, 99, 235, 0.7)' : paletaColores,
+                        borderColor: 'rgba(37, 99, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: colorTextoDinamico } } },
+                    scales: paqueteIA.grafico === 'bar' || paqueteIA.grafico === 'line' ? {
+                        x: { ticks: { color: colorTextoDinamico } },
+                        y: { ticks: { color: colorTextoDinamico } }
+                    } : {}
+                }
+            });
+        } else {
+            document.getElementById('ia-chart-container').style.display = 'none';
+        }
 
     } catch (error) {
-        estadoDiv.innerHTML = `<span style="color:#ef4444;"><i class="fas fa-wifi"></i> Error al conectar con el motor de Inteligencia Artificial en el servidor.</span>`;
+        loadingDiv.classList.add("hidden");
+        resultsDiv.classList.remove("hidden");
+        tablaDiv.innerHTML = "";
+        document.getElementById('ia-chart-container').style.display = 'none';
+        textDiv.innerHTML = `<span style="color:#EF4444;"><i class="fas fa-exclamation-triangle"></i> <strong>Error local:</strong> ${error.message}. ¿NetBeans está ejecutando el proyecto en el puerto 8080?</span>`;
     }
+}
+
+/* =========================================================================
+   5. EXPORTACIÓN A PDF
+   ========================================================================= */
+function exportarPDF() {
+    const elemento = document.getElementById("ia-results");
+    const opciones = {
+        margin:       15,
+        filename:     'Reporte_Auditoria_SEGEP.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opciones).from(elemento).save();
 }

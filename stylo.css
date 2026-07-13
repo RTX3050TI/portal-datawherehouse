@@ -1,268 +1,986 @@
-/* Variables CSS para Temas Dinámicos */
+/* =========================================================================
+   1. DEFINICIÓN DE TEMAS POLÍTICOS (VARIABLES DE ENTORNO)
+   ========================================================================= */
+
 :root {
-    --bg-color: #f4f7fa;
-    --sidebar-bg: #1e293b;
-    --sidebar-text: #ffffff;
-    --card-bg: #ffffff;
-    --text-main: #333333;
-    --text-muted: #64748b;
-    --accent-color: #3b82f6;
-    --border-color: #e2e8f0;
+    /* --- THEME 1: AZURE BLUE (Por Defecto - Corporativo Claro) --- */
+    --bg: #F8FAFC;
+    --panel: #FFFFFF;
+    --text-main: #0F172A;
+    --text-muted: #64748B;
+    --border: #E2E8F0;
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 10px 15px -3px rgba(15, 23, 42, 0.1);
+    --glow: rgba(37, 99, 235, 0.15);
+    --scrollbar-thumb: #CBD5E1;
+    --scrollbar-track: #F1F5F9;
+    --card-bg: #FFFFFF;
 }
 
-[data-theme="dark"] {
-    --bg-color: #0f172a;
-    --sidebar-bg: #0b1120;
-    --sidebar-text: #f8fafc;
-    --card-bg: #1e293b;
-    --text-main: #f1f5f9;
-    --text-muted: #94a3b8;
-    --border-color: #334155;
+body.midnight {
+    /* --- THEME 2: MIDNIGHT (Azul Medianoche Profundo) --- */
+    --bg: #0B132B;
+    --panel: #1C2541;
+    --text-main: #F1F5F9;
+    --text-muted: #5BC0BE;
+    --border: #3A506B;
+    --primary: #6FFFE9;
+    --primary-hover: #5BC0BE;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --glow: rgba(111, 255, 233, 0.2);
+    --scrollbar-thumb: #3A506B;
+    --scrollbar-track: #0B132B;
+    --card-bg: #1C2541;
 }
 
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+body.galaxy {
+    /* --- THEME 3: GALAXY (Espacio Profundo y Morados) --- */
+    --bg: #13001C;
+    --panel: #240046;
+    --text-main: #E0AAFF;
+    --text-muted: #C77DFF;
+    --border: #5A189A;
+    --primary: #9D4EDD;
+    --primary-hover: #7B2CBF;
+    --shadow: 0 8px 32px rgba(157, 78, 221, 0.2);
+    --glow: rgba(224, 170, 255, 0.25);
+    --scrollbar-thumb: #5A189A;
+    --scrollbar-track: #13001C;
+    --card-bg: #1A0036;
 }
 
-body { 
-    background-color: var(--bg-color); 
-    color: var(--text-main); 
-    min-height: 100vh; 
-    display: flex; 
-    transition: background-color 0.3s, color 0.3s; 
+body.emerald {
+    /* --- THEME 4: EMERALD (Verde Alta Fidelidad / Hacker Ejecutivo) --- */
+    --bg: #06140E;
+    --panel: #0B251A;
+    --text-main: #ECFDF5;
+    --text-muted: #34D399;
+    --border: #10B981;
+    --primary: #059669;
+    --primary-hover: #047857;
+    --shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+    --glow: rgba(52, 211, 153, 0.2);
+    --scrollbar-thumb: #115E59;
+    --scrollbar-track: #06140E;
+    --card-bg: #0D2D20;
 }
 
-/* Pantalla de Inicio de Sesión */
-.login-overlay { 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background: #0f172a; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    z-index: 9999; 
-    transition: opacity 0.5s ease; 
+body.solar {
+    /* --- THEME 5: SOLAR (Energía Ámbar y Oro) --- */
+    --bg: #1C1917;
+    --panel: #292524;
+    --text-main: #FAFAF9;
+    --text-muted: #F59E0B;
+    --border: #44403C;
+    --primary: #D97706;
+    --primary-hover: #B45309;
+    --shadow: 0 10px 25px rgba(217, 119, 6, 0.1);
+    --glow: rgba(245, 158, 11, 0.2);
+    --scrollbar-thumb: #44403C;
+    --scrollbar-track: #1C1917;
+    --card-bg: #292524;
 }
 
-.login-card { 
-    background: white; 
-    padding: 40px; 
-    border-radius: 12px; 
-    width: 100%; 
-    max-width: 400px; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
-    text-align: center; 
+body.crimson {
+    /* --- THEME 6: CRIMSON (Rojo Radical Avanzado) --- */
+    --bg: #1A0508;
+    --panel: #2D0B10;
+    --text-main: #FFF5F5;
+    --text-muted: #F87171;
+    --border: #7F1D1D;
+    --primary: #DC2626;
+    --primary-hover: #B91C1C;
+    --shadow: 0 8px 30px rgba(220, 38, 38, 0.2);
+    --glow: rgba(248, 113, 113, 0.25);
+    --scrollbar-thumb: #7F1D1D;
+    --scrollbar-track: #1A0508;
+    --card-bg: #340E14;
 }
 
-.login-icon { 
-    font-size: 3rem; 
-    color: #3b82f6; 
-    margin-bottom: 15px; 
+body.arctic-ice {
+    /* --- THEME 7: ARCTIC ICE (Blanco Glaciar e Hielo) --- */
+    --bg: #EBF3F5;
+    --panel: #FFFFFF;
+    --text-main: #1E293B;
+    --text-muted: #0EA5E9;
+    --border: #CBD5E1;
+    --primary: #0284C7;
+    --primary-hover: #0369A1;
+    --shadow: 0 4px 12px rgba(14, 165, 233, 0.08);
+    --glow: rgba(14, 165, 233, 0.15);
+    --scrollbar-thumb: #94A3B8;
+    --scrollbar-track: #EBF3F5;
+    --card-bg: #FFFFFF;
 }
 
-.login-card h2 { 
-    color: #1e293b; 
-    margin-bottom: 10px; 
-    font-size: 1.6rem; 
+body.ocean {
+    /* --- THEME 8: OCEAN (Turquesas y Abismos Marinos) --- */
+    --bg: #01161E;
+    --panel: #124559;
+    --text-main: #EFF6E0;
+    --text-muted: #AEC3B0;
+    --border: #598392;
+    --primary: #00A896;
+    --primary-hover: #028090;
+    --shadow: 0 10px 30px rgba(0, 168, 150, 0.15);
+    --glow: rgba(0, 168, 150, 0.2);
+    --scrollbar-thumb: #598392;
+    --scrollbar-track: #01161E;
+    --card-bg: #124559;
 }
 
-.login-subtitle { 
-    color: #64748b; 
-    font-size: 0.9rem; 
-    margin-bottom: 20px; 
+body.cyber-neon {
+    /* --- THEME 9: CYBER NEON (Contraste Extremo y Luces) --- */
+    --bg: #000000;
+    --panel: #111111;
+    --text-main: #00FFFF;
+    --text-muted: #FF00FF;
+    --border: #333333;
+    --primary: #FF00FF;
+    --primary-hover: #00FFFF;
+    --shadow: 0 0 15px rgba(255, 0, 255, 0.4), 0 0 5px rgba(0, 255, 255, 0.2);
+    --glow: rgba(0, 255, 255, 0.3);
+    --scrollbar-thumb: #222222;
+    --scrollbar-track: #000000;
+    --card-bg: #080808;
 }
 
-.login-card input { 
-    width: 100%; 
-    padding: 12px; 
-    margin: 10px 0; 
-    border: 1px solid #cbd5e1; 
-    border-radius: 6px; 
-    font-size: 1rem; 
-    color: #333;
+body.aurora {
+    /* --- THEME 10: AURORA (Luces del Norte Shifting) --- */
+    --bg: #0A0F1D;
+    --panel: #111A2E;
+    --text-main: #A7F3D0;
+    --text-muted: #C084FC;
+    --border: #1E293B;
+    --primary: #10B981;
+    --primary-hover: #8B5CF6;
+    --shadow: 0 8px 32px rgba(16, 185, 129, 0.1);
+    --glow: rgba(192, 132, 252, 0.2);
+    --scrollbar-thumb: #1E293B;
+    --scrollbar-track: #0A0F1D;
+    --card-bg: #141E33;
 }
 
-.login-btn { 
-    width: 100%; 
-    padding: 12px; 
-    background: #3b82f6; 
-    color: white; 
-    border: none; 
-    border-radius: 6px; 
-    font-weight: bold; 
-    cursor: pointer; 
-    font-size: 1rem; 
-    margin-top: 15px; 
-    transition: 0.2s;
+/* =========================================================================
+   2. REGLAS BASE, RESETS Y PERSONALIZACIÓN DE INTERFAZ
+   ========================================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.login-btn:hover { 
-    background: #2563eb; 
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+    transition: background-color 0.4s, color 0.4s;
 }
 
-.login-error { 
-    color: #ef4444; 
-    font-size: 0.9rem; 
-    margin-top: 10px; 
-    display: none; 
+button, input, select, textarea {
+    font-family: inherit;
+    outline: none;
 }
 
-/* Panel de Control Principal */
-.app-container { 
-    display: none; 
-    width: 100%; 
-    min-height: 100vh; 
+/* --- Estilo unificado para Barras de Desplazamiento (Scrollbar) --- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
 }
 
-.sidebar { 
-    width: 260px; 
-    background-color: var(--sidebar-bg); 
-    color: var(--sidebar-text); 
-    padding: 20px; 
-    transition: 0.3s;
+/* --- Utilidades globales --- */
+.hidden { display: none !important; }
+
+/* =========================================================================
+   3. CAPA DE FONDO ANIMADO DE ALTA FIDELIDAD
+   ========================================================================= */
+
+#animated-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.6;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--glow) 0%, transparent 60%);
+    transition: opacity 0.5s;
 }
 
-.sidebar h2 { 
-    font-size: 1.1rem; 
-    margin-bottom: 30px; 
-    text-align: center; 
-    border-bottom: 1px solid #334155; 
-    padding-bottom: 15px; 
+body.animations-off #animated-bg {
+    display: none !important;
 }
 
-.nav-link { 
-    display: block; 
-    color: var(--sidebar-text); 
-    text-decoration: none; 
-    padding: 12px 15px; 
-    margin-bottom: 8px; 
-    border-radius: 6px; 
-    transition: 0.2s;
+/* =========================================================================
+   4. INTERFAZ DE AUTENTICACIÓN (LOGIN BOX)
+   ========================================================================= */
+
+#login-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
 }
 
-.nav-link.active, .nav-link:hover { 
-    background-color: var(--accent-color); 
-    color: white;
+.login-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transform: translateY(0);
+    transition: all 0.3s ease;
 }
 
-.nav-link i { 
-    margin-right: 10px; 
-    width: 20px; 
-    text-align: center; 
+.login-logo i {
+    font-size: 42px;
+    color: var(--primary);
+    margin-bottom: 15px;
 }
 
-.main-content { 
-    flex: 1; 
-    padding: 30px; 
-    overflow-y: auto; 
+.login-logo h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
 }
 
-.header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 30px; 
+.login-logo h2 span {
+    color: var(--primary);
 }
 
-.header h1 { 
-    font-size: 1.8rem; 
+.login-logo p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 30px;
 }
 
-.header-subtitle {
-    color: var(--text-muted); 
-    margin-top: 5px;
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
 }
 
-.theme-toggle { 
-    background: var(--card-bg); 
-    border: 1px solid var(--border-color); 
-    color: var(--text-main); 
-    padding: 10px 15px; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    transition: 0.3s;
-}
-
-.card { 
-    background-color: var(--card-bg); 
-    border: 1px solid var(--border-color); 
-    border-radius: 10px; 
-    padding: 20px; 
-    margin-bottom: 20px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-    transition: 0.3s;
-}
-
-.selector-label {
-    font-weight: bold; 
-    display: block; 
-    margin-bottom: 10px; 
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     color: var(--text-muted);
 }
 
-.selector-box { 
-    width: 100%; 
-    padding: 12px; 
-    border-radius: 8px; 
-    border: 1px solid var(--border-color); 
-    background: var(--card-bg); 
-    color: var(--text-main); 
-    font-size: 1.05rem; 
-    font-weight: 600; 
-    margin-bottom: 5px; 
-    cursor: pointer; 
+.input-group input {
+    width: 100%;
+    padding: 14px 15px 14px 45px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 14px;
+    transition: all 0.2s;
 }
 
-.card-title { 
-    font-size: 1.2rem; 
-    margin-bottom: 20px; 
+.input-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--glow);
 }
 
-/* Layout del Gráfico y Caja de Análisis */
-.query-container { 
-    display: grid; 
-    grid-template-columns: 2fr 1fr; 
-    gap: 20px; 
+#btn-login {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.2s;
+    cursor: pointer;
 }
 
-.chart-box { 
-    position: relative; 
-    height: 360px; 
-    width: 100%; 
+#btn-login:hover {
+    background: var(--primary-hover);
 }
 
-.interpretation-box { 
-    background-color: rgba(59, 130, 246, 0.08); 
-    border-left: 4px solid var(--accent-color); 
-    padding: 20px; 
-    border-radius: 0 8px 8px 0; 
+#login-spinner {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-.interpretation-box h4 { 
-    margin-bottom: 12px; 
-    color: var(--accent-color); 
+/* =========================================================================
+   5. DISEÑO DEL ENTORNO PRINCIPAL (SISTEMA BI)
+   ========================================================================= */
+
+#main-system {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
-.interpretation-box p { 
-    font-size: 0.95rem; 
-    line-height: 1.6; 
-    color: var(--text-muted); 
+/* --- Barra Superior (Topbar) --- */
+.topbar {
+    height: 75px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: var(--shadow);
+    z-index: 100;
 }
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container i {
+    font-size: 22px;
+    color: var(--primary);
+}
+
+.logo-container h1 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.online-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg);
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10B981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10B981;
+}
+
+body.animations-off .status-dot {
+    animation: none;
+}
+
+/* Animación del pulso del servidor */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 185, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(16, 185, 185, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 185, 0); }
+}
+.status-dot { animation: pulse 2s infinite; }
+
+/* Selector Central de Pestañas */
+.topbar-center {
+    display: flex;
+    background: var(--bg);
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    color: var(--text-main);
+}
+
+.nav-btn.active {
+    background: var(--panel);
+    color: var(--primary);
+    box-shadow: var(--shadow);
+}
+
+#btn-config {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+#btn-config:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: rotate(45deg);
+}
+
+/* =========================================================================
+   6. PANEL LATERAL DE CONFIGURACIÓN AVANZADA
+   ========================================================================= */
+
+#config-panel {
+    position: fixed;
+    top: 0; right: 0;
+    width: 320px;
+    height: 100vh;
+    background: var(--panel);
+    border-left: 1px solid var(--border);
+    box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.config-panel-hidden {
+    transform: translateX(100%);
+}
+
+.config-header {
+    padding: 25px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.config-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#btn-close-config {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.config-body {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow-y: auto;
+}
+
+.config-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.config-group label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+#lang-selector {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Rejilla de Temas (Theme Grid) */
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.theme-btn {
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.theme-btn:hover { transform: scale(1.1); }
+
+/* Colores representativos en los botones de configuración */
+.theme-btn[data-theme="azure-blue"] { background: #2563EB; }
+.theme-btn[data-theme="midnight"] { background: #1C2541; border-color: #6FFFE9; }
+.theme-btn[data-theme="galaxy"] { background: #240046; border-color: #9D4EDD; }
+.theme-btn[data-theme="emerald"] { background: #0B251A; border-color: #10B981; }
+.theme-btn[data-theme="solar"] { background: #D97706; }
+.theme-btn[data-theme="crimson"] { background: #DC2626; }
+.theme-btn[data-theme="arctic-ice"] { background: #EBF3F5; border-color: #0284C7; }
+.theme-btn[data-theme="ocean"] { background: #124559; border-color: #00A896; }
+.theme-btn[data-theme="cyber-neon"] { background: #000000; border-color: #FF00FF; }
+.theme-btn[data-theme="aurora"] { background: #111A2E; border-color: #10B981; }
+
+/* Switch de Animaciones */
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+.toggle-switch label {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--border);
+    border-radius: 34px;
+    transition: .4s;
+}
+
+.toggle-switch label:before {
+    position: absolute; content: ""; height: 22px; width: 22px; left: 4px; bottom: 4px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    transition: .4s;
+}
+
+.toggle-switch input:checked + label { background-color: var(--primary); }
+.toggle-switch input:checked + label:before { transform: translateX(30px); }
+
+.btn-danger {
+    margin-top: auto;
+    width: 100%;
+    padding: 14px;
+    background: rgba(220, 38, 38, 0.1);
+    color: #DC2626;
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-danger:hover {
+    background: #DC2626;
+    color: #FFFFFF;
+}
+
+/* =========================================================================
+   7. CONTENEDOR DE ESPACIO DE TRABAJO Y SECCIONES
+   ========================================================================= */
+
+#workspace {
+    flex: 1;
+    padding: 35px 40px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.view-section {
+    display: none;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.view-section.active {
+    display: block;
+}
+
+.view-header {
+    margin-bottom: 25px;
+}
+
+.view-header h2 {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.view-header p {
+    color: var(--text-muted);
+    font-size: 14.5px;
+}
+
+/* --- ESTILOS COMPONENTES: TARJETAS (CARDS) --- */
+.ia-card, .arch-card, .contact-form-container, .wa-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+/* --- ZONA A: DASHBOARD BI --- */
+.bi-container {
+    background: var(--card-bg);
+    border: 1px dashed var(--border);
+    border-radius: 16px;
+    height: calc(100vh - 210px);
+    min-height: 550px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bi-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-muted);
+    gap: 15px;
+}
+
+.bi-placeholder i { font-size: 48px; opacity: 0.4; }
+
+/* --- ZONA B: MOTOR IA (AURA) --- */
+.ia-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.ia-suggestions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.chip-btn {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: var(--text-main);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chip-btn:hover {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #FFFFFF;
+}
+
+.search-container {
+    display: flex;
+    gap: 12px;
+    background: var(--panel);
+    padding: 8px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.search-container input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0 15px;
+    color: var(--text-main);
+    font-size: 15px;
+}
+
+#btn-consultar-ia {
+    background: var(--primary);
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#btn-consultar-ia:hover { background: var(--primary-hover); }
+
+/* Cargador Cognitivo IA */
+#ia-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--primary);
+}
+
+.pulsing-brain {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+@keyframes brainPulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.6; }
+}
+.pulsing-brain { animation: brainPulse 1.8s infinite ease-in-out; }
+
+/* Contenedor de Resultados IA */
+#ia-results {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.action-bar-results {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-pdf {
+    background: #EF4444;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.ia-card { padding: 25px; }
+
+.text-card {
+    border-left: 4px solid var(--primary);
+    line-height: 1.6;
+    font-size: 14.5px;
+}
+
+.chart-card {
+    height: 380px;
+    position: relative;
+}
+
+/* Diseño de Tabla de Datos IA */
+.table-card { overflow-x: auto; padding: 0; }
+
+.tabla-ia {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13.5px;
+}
+
+.tabla-ia th {
+    background: var(--border);
+    color: var(--text-main);
+    padding: 14px 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+.tabla-ia td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-main);
+}
+
+.tabla-ia tr:last-child td { border: none; }
+
+/* --- ZONA C: ACERCA DE --- */
+.architecture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.arch-card {
+    padding: 30px;
+    text-align: center;
+}
+
+.arch-card i {
+    font-size: 36px;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.arch-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.arch-card p {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
+/* --- ZONA D: MESA DE AYUDA / CONTACTO --- */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 30px;
+}
+
+.contact-form-container { padding: 35px; }
+
+.contact-form-container h2 { font-size: 20px; font-weight: 800; margin-bottom: 25px; }
+
+#support-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#support-form input, #support-form select, #support-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 14px;
+}
+
+#support-form input:focus, #support-form select:focus, #support-form textarea:focus {
+    border-color: var(--primary);
+}
+
+.btn-submit {
+    background: var(--primary);
+    color: #FFFFFF;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.wa-card {
+    padding: 35px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.wa-icon { font-size: 48px; color: #25D366; margin-bottom: 15px; }
+
+.wa-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+
+.wa-card p {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.btn-wa {
+    display: inline-block;
+    background: #25D366;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btn-wa:hover { background: #20BA5A; }
+
+/* =========================================================================
+   8. PIE DE PÁGINA (FOOTER)
+   ========================================================================= */
+
+footer {
+    height: 50px;
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    z-index: 90;
+}
+
+/* =========================================================================
+   9. MEDIA QUERIES (RESPONSIVIDAD MÓVIL)
+   ========================================================================= */
 
 @media (max-width: 992px) {
-    .query-container { 
-        grid-template-columns: 1fr; 
-    }
-    body {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-    }
+    .contact-wrapper { grid-template-columns: 1fr; }
+    .topbar-center span { display: none; } /* Oculta el texto del menú en tablets */
+}
+
+@media (max-width: 576px) {
+    .topbar { padding: 0 15px; }
+    .topbar-left h1 { display: none; }
+    .online-status span { display: none; }
+    #workspace { padding: 20px 15px; }
 }

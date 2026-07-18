@@ -1,269 +1,160 @@
-/* =========================================================================
-   1. DICCIONARIO DE TRADUCCIÓN (INTERNACIONALIZACIÓN DE LA INTERFAZ)
-   ========================================================================= */
+// --- DICCIONARIO INTERNACIONAL ---
 const LANGUAGES = {
     es: {
-        "login-subtitle": "Inteligencia de Negocios",
-        "login-btn": "Ingresar al Sistema",
-        "login-loading": "Autenticando en Azure...",
-        "status-online": "Online",
-        "nav-bi": "Dashboard BI",
-        "nav-ia": "Asistente IA",
-        "nav-about": "Acerca de",
-        "nav-contact": "Mesa de Ayuda",
-        "config-title": "Configuración",
-        "config-lang": "Idioma del Sistema",
-        "config-theme": "Temas de Entorno",
-        "config-perf": "Efectos Visuales",
-        "config-logout": "Cerrar Sesión",
-        "bi-title": "Inteligencia de Negocios Corporativa",
-        "bi-desc": "Visualización de reportes estructurales a través de Power BI / Looker.",
-        "ia-btn": "Consultar",
-        "ia-loading-text": "AURA está procesando los datos en SQL Server...",
-        "ia-pdf": "Exportar Auditoría",
-        "about-title": "Arquitectura del Sistema",
-        "contact-title": "Mesa de Ayuda",
-        "contact-select": "Seleccione el área de destino...",
-        "contact-send": "Enviar Ticket",
-        "footer-rights": "Todos los derechos reservados."
+        "login-subtitle": "Inteligencia de Negocios", "login-btn": "Ingresar al Sistema", "login-remember": "Recordar mis credenciales",
+        "login-loading": "Autenticando en Azure...", "status-online": "En línea - Azure SQL Server",
+        "nav-bi": "Dashboard BI", "nav-ia": "Asistente IA", "config-title": "Configuración",
+        "bi-title": "Inteligencia de Negocios Corporativa", "bi-desc": "Visualización de reportes estructurales a través de Power BI.",
+        "ia-btn": "Consultar", "ia-loading-text": "AURA está procesando los datos...", "ia-pdf": "Exportar Auditoría",
+        "config-logout": "Cerrar Sesión", "config-theme": "Temas de Entorno", "config-perf": "Efectos Visuales"
     },
     qu: {
-        "login-subtitle": "Runa Yachay Kachay",
-        "login-btn": "Yaykuy Llikaman",
-        "login-loading": "Azure llikapi qatichkan...",
-        "status-online": "Kachkan",
-        "nav-bi": "Tukuypaq Mastari",
-        "nav-ia": "IA Yanapakuq",
-        "nav-about": "Ñuqanchikmanta",
-        "nav-contact": "Yanapakuy Manka",
-        "config-title": "Allichaykuna",
-        "config-lang": "Llika Rimay",
-        "config-theme": "Llimphi Hawakuna",
-        "config-perf": "Kuyuqkuna Rikchay",
-        "config-logout": "Lluqsiy",
-        "bi-title": "Hatun Ruraykunapa Mastarinin",
-        "bi-desc": "Power BI / Looker Studio nisqapi qatipay ruraykuna khaway.",
-        "ia-btn": "Tapuy",
-        "ia-loading-text": "AURA SQL Serverpi rurachkan...",
-        "ia-pdf": "Qatipayta PDFman Hurquy",
-        "about-title": "Llikapa Shukunin",
-        "contact-title": "Yanapakuy Manka",
-        "contact-select": "Mayman chayana akllay...",
-        "contact-send": "Willakuyta Apachiy",
-        "footer-rights": "Tukuy ruraykuna amachasqam."
+        "login-subtitle": "Runa Yachay Kachay", "login-btn": "Yaykuy Llikaman", "login-remember": "Kikinpa sutiyta yuyay",
+        "login-loading": "Azure llikapi qatichkan...", "status-online": "Kachkan",
+        "nav-bi": "Tukuypaq Mastari", "nav-ia": "IA Yanapakuq", "config-title": "Allichaykuna",
+        "bi-title": "Hatun Ruraykunapa Mastarinin", "bi-desc": "Power BI nisqapi qatipay ruraykuna khaway.",
+        "ia-btn": "Tapuy", "ia-loading-text": "AURA SQL Serverpi rurachkan...", "ia-pdf": "Qatipayta PDFman Hurquy",
+        "config-logout": "Lluqsiy", "config-theme": "Llimphi Hawakuna", "config-perf": "Kuyuqkuna Rikchay"
     },
     en: {
-        "login-subtitle": "Business Intelligence",
-        "login-btn": "Sign In to System",
-        "login-loading": "Authenticating on Azure...",
-        "status-online": "Online",
-        "nav-bi": "BI Dashboard",
-        "nav-ia": "AI Assistant",
-        "nav-about": "About Project",
-        "nav-contact": "Help Desk",
-        "config-title": "Settings",
-        "config-lang": "System Language",
-        "config-theme": "Environment Themes",
-        "config-perf": "Visual Effects",
-        "config-logout": "Log Out",
-        "bi-title": "Corporate Business Intelligence",
-        "bi-desc": "Visualization of structural reports through Power BI / Looker.",
-        "ia-btn": "Query",
-        "ia-loading-text": "AURA is processing database on SQL Server...",
-        "ia-pdf": "Export Audit",
-        "about-title": "System Architecture",
-        "contact-title": "Help Desk",
-        "contact-select": "Select target department...",
-        "contact-send": "Send Ticket",
-        "footer-rights": "All rights reserved."
-    },
-    pt: {
-        "login-subtitle": "Inteligência de Negócios",
-        "login-btn": "Entrar no Sistema",
-        "login-loading": "Autenticando no Azure...",
-        "status-online": "Online",
-        "nav-bi": "Painel BI",
-        "nav-ia": "Assistente IA",
-        "nav-about": "Sobre o Projeto",
-        "nav-contact": "Mesa de Ajuda",
-        "config-title": "Configuração",
-        "config-lang": "Idioma do Sistema",
-        "config-theme": "Temas de Ambiente",
-        "config-perf": "Efeitos Visuais",
-        "config-logout": "Sair",
-        "bi-title": "Inteligência de Negócios Corporativa",
-        "bi-desc": "Visualização de relatórios estruturais através do Power BI / Looker.",
-        "ia-btn": "Consultar",
-        "ia-loading-text": "AURA está processando dados no SQL Server...",
-        "ia-pdf": "Exportar Auditoria",
-        "about-title": "Arquitetura do Sistema",
-        "contact-title": "Mesa de Ajuda",
-        "contact-select": "Selecione a área de destino...",
-        "contact-send": "Enviar Ticket",
-        "footer-rights": "Todos os direitos reservados."
-    },
-    fr: {
-        "login-subtitle": "Informatique Décisionnelle",
-        "login-btn": "Se Connecter",
-        "login-loading": "Authentification sur Azure...",
-        "status-online": "En ligne",
-        "nav-bi": "Tableau BI",
-        "nav-ia": "Assistant IA",
-        "nav-about": "À Propos",
-        "nav-contact": "Mesa d'Aide",
-        "config-title": "Configuration",
-        "config-lang": "Langue du Système",
-        "config-theme": "Thèmes d'Environnement",
-        "config-perf": "Effets Visuels",
-        "config-logout": "Se Déconnecter",
-        "bi-title": "Informatique Décisionnelle Corporative",
-        "bi-desc": "Visualisation des rapports structurels via Power BI / Looker.",
-        "ia-btn": "Consulter",
-        "ia-loading-text": "AURA traite les données sur SQL Server...",
-        "ia-pdf": "Exporter l'Audit",
-        "about-title": "Architecture du Système",
-        "contact-title": "Mesa d'Aide",
-        "contact-select": "Sélectionnez la zone cible...",
-        "contact-send": "Envoyer le Ticket",
-        "footer-rights": "Tous droits réservés."
+        "login-subtitle": "Business Intelligence", "login-btn": "Sign In to System", "login-remember": "Remember my credentials",
+        "login-loading": "Authenticating on Azure...", "status-online": "Online - Azure SQL Server",
+        "nav-bi": "BI Dashboard", "nav-ia": "AI Assistant", "config-title": "Settings",
+        "bi-title": "Corporate Business Intelligence", "bi-desc": "Visualization of structural reports through Power BI.",
+        "ia-btn": "Query", "ia-loading-text": "AURA is processing database...", "ia-pdf": "Export Audit",
+        "config-logout": "Log Out", "config-theme": "Environment Themes", "config-perf": "Visual Effects"
     }
 };
 
-/* =========================================================================
-   2. VARIABLES E INSTANCIAS GLOBALES
-   ========================================================================= */
-let chartInstance = null; 
+let historialConversacion = []; // LA MEMORIA DE AURA
 
-/* =========================================================================
-   3. INICIALIZACIÓN COMPLETA DEL SISTEMA (DOM LOADED)
-   ========================================================================= */
 document.addEventListener("DOMContentLoaded", () => {
     
     const loginScreen = document.getElementById("login-screen");
     const mainSystem = document.getElementById("main-system");
     const loginForm = document.getElementById("login-form");
-    const loginSpinner = document.getElementById("login-spinner");
     const btnLogin = document.getElementById("btn-login");
+    const loginSpinner = document.getElementById("login-spinner");
+    const loginUser = document.getElementById("login-user");
+    const loginPass = document.getElementById("login-pass");
+    const rememberCheck = document.getElementById("remember-check");
 
-    // --- CARGAR DATOS DE MEMORIA NATIVA (SESIÓN, TEMA E IDIOMA) ---
-    
-    // Verificar si ya hay una sesión iniciada
+    // 1. CARGA DE MEMORIA: SESIÓN, TEMA E IDIOMA
     if (localStorage.getItem("segep_session") === "activa") {
         loginScreen.classList.add("hidden");
         mainSystem.classList.remove("hidden");
+        aplicarSaludoPersonalizado();
     }
-
-    // Verificar si hay un tema guardado
+    if (localStorage.getItem("segep_saved_user")) {
+        loginUser.value = localStorage.getItem("segep_saved_user");
+        loginPass.value = localStorage.getItem("segep_saved_pass");
+        rememberCheck.checked = true;
+    }
     const savedTheme = localStorage.getItem("segep_theme");
     if (savedTheme && savedTheme !== "azure-blue") {
         document.body.classList.add(savedTheme);
     }
-
-    // Verificar si hay un idioma guardado
     const savedLang = localStorage.getItem("segep_lang");
     if (savedLang) {
         document.getElementById("lang-selector").value = savedLang;
         setTimeout(() => document.getElementById("lang-selector").dispatchEvent(new Event('change')), 100);
     }
 
-    // --- MANEJO DEL FORMULARIO DE ACCESO (LOGIN MOCKUP) ---
+    // 2. LÓGICA DE ACCESO Y SALUDO PERSONALIZADO
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
+        
+        if (rememberCheck.checked) {
+            localStorage.setItem("segep_saved_user", loginUser.value);
+            localStorage.setItem("segep_saved_pass", loginPass.value);
+        } else {
+            localStorage.removeItem("segep_saved_user");
+            localStorage.removeItem("segep_saved_pass");
+        }
+
+        let rawName = loginUser.value.split('@')[0];
+        let capitalizedName = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase();
+        localStorage.setItem("segep_active_name", capitalizedName);
+
         btnLogin.classList.add("hidden");
         loginSpinner.classList.remove("hidden");
 
-        // Simulación de conexión y verificación asíncrona
         setTimeout(() => {
-            localStorage.setItem("segep_session", "activa"); // Guardar estado de sesión
+            localStorage.setItem("segep_session", "activa"); 
+            aplicarSaludoPersonalizado();
+            
             loginScreen.classList.add("hidden");
             mainSystem.classList.remove("hidden");
             window.dispatchEvent(new Event('resize'));
+            btnLogin.classList.remove("hidden");
+            loginSpinner.classList.add("hidden");
         }, 1500);
     });
 
-    // --- NAVEGACIÓN SPA ENTRE SECCIONES ---
+    function aplicarSaludoPersonalizado() {
+        const nombreUsuario = localStorage.getItem("segep_active_name");
+        if (nombreUsuario) {
+            const userNameElement = document.querySelector('.user-name');
+            if (userNameElement) userNameElement.textContent = nombreUsuario;
+
+            const auraGreeting = document.querySelector('.aura-bubble .bubble-content');
+            if (auraGreeting && !auraGreeting.classList.contains('advanced-results')) {
+                auraGreeting.innerHTML = `Hola, <strong>${nombreUsuario}</strong>. Soy AURA. He indexado el Data Warehouse del gasto COVID-19. Selecciona un modelo analítico y escribe tu pregunta en la parte inferior.`;
+            }
+        }
+    }
+
+    // 3. CERRAR SESIÓN
+    document.getElementById("btn-logout").addEventListener("click", () => {
+        if(confirm("¿Está seguro que desea abandonar el entorno analítico actual?")) {
+            localStorage.removeItem("segep_session");
+            localStorage.removeItem("segep_active_name");
+            window.location.reload();
+        }
+    });
+
+    // 4. NAVEGACIÓN SPA
     const navButtons = document.querySelectorAll(".nav-btn");
     const viewSections = document.querySelectorAll(".view-section");
-
     navButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             navButtons.forEach(b => b.classList.remove("active"));
             viewSections.forEach(s => s.classList.remove("active"));
-
             btn.classList.add("active");
-            const targetId = btn.getAttribute("data-target");
-            document.getElementById(targetId).classList.add("active");
+            document.getElementById(btn.getAttribute("data-target")).classList.add("active");
         });
     });
 
-    // --- CONTROL DE PANEL LATERAL DE CONFIGURACIÓN ---
-    const btnConfig = document.getElementById("btn-config");
-    const btnCloseConfig = document.getElementById("btn-close-config");
-    const configPanel = document.getElementById("config-panel");
+    // 5. TEMAS Y CONFIGURACIÓN
+    document.getElementById("btn-config").addEventListener("click", () => document.getElementById("config-panel").classList.remove("config-panel-hidden"));
+    document.getElementById("btn-close-config").addEventListener("click", () => document.getElementById("config-panel").classList.add("config-panel-hidden"));
 
-    btnConfig.addEventListener("click", () => configPanel.classList.remove("config-panel-hidden"));
-    btnCloseConfig.addEventListener("click", () => configPanel.classList.add("config-panel-hidden"));
-
-    // --- MANEJO DE LOS 10 TEMAS DE ENTORNO ---
-    const themeButtons = document.querySelectorAll(".theme-btn");
-    themeButtons.forEach(btn => {
+    document.querySelectorAll(".theme-btn").forEach(btn => {
         btn.addEventListener("click", () => {
-            document.body.className = ""; // Limpiar clases
+            document.body.className = ""; 
             const selectedTheme = btn.getAttribute("data-theme");
-            
-            if (selectedTheme !== "azure-blue") {
-                document.body.classList.add(selectedTheme);
-            }
-            
-            localStorage.setItem("segep_theme", selectedTheme); // Guardar tema en memoria
-            
-            if (!document.getElementById("toggle-animations").checked) {
-                document.body.classList.add("animations-off");
-            }
+            if (selectedTheme !== "azure-blue") document.body.classList.add(selectedTheme);
+            localStorage.setItem("segep_theme", selectedTheme); 
         });
     });
 
-    // --- INTERRUPTOR DE ANIMACIONES ---
-    const toggleAnimations = document.getElementById("toggle-animations");
-    toggleAnimations.addEventListener("change", () => {
-        if (toggleAnimations.checked) {
-            document.body.classList.remove("animations-off");
-        } else {
-            document.body.classList.add("animations-off");
-        }
-    });
-
-    // --- RENDERIZADO DEL RESPLANDOR DEL MOUSE ---
-    window.addEventListener("mousemove", (e) => {
-        if (!document.body.classList.contains("animations-off")) {
-            const x = (e.clientX / window.innerWidth) * 100;
-            const y = (e.clientY / window.innerHeight) * 100;
-            document.documentElement.style.setProperty('--mouse-x', `${x}%`);
-            document.documentElement.style.setProperty('--mouse-y', `${y}%`);
-        }
-    });
-
-    // --- TRADUCTOR MULTILINGÜE ---
+    // 6. TRADUCTOR MÚLTIPLE
     const langSelector = document.getElementById("lang-selector");
     langSelector.addEventListener("change", () => {
         const selectedLang = langSelector.value;
         const dictionary = LANGUAGES[selectedLang];
-
-        localStorage.setItem("segep_lang", selectedLang); // Guardar idioma en memoria
+        localStorage.setItem("segep_lang", selectedLang); 
 
         document.querySelectorAll("[data-lang]").forEach(element => {
             const langKey = element.getAttribute("data-lang");
             if (dictionary[langKey]) {
-                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
-                    element.placeholder = dictionary[langKey];
-                } else {
+                if (element.tagName === "INPUT") element.placeholder = dictionary[langKey];
+                else {
                     const icon = element.querySelector("i");
                     if (icon) {
                         element.innerHTML = "";
                         element.appendChild(icon);
-                        element.removeAttribute("data-lang");
                         element.innerHTML += " " + dictionary[langKey];
-                        element.setAttribute("data-lang", langKey);
                     } else {
                         element.textContent = dictionary[langKey];
                     }
@@ -272,163 +163,300 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- ENVÍO DE FORMULARIO DE SOPORTE MOCK ---
-    const supportForm = document.getElementById("support-form");
-    supportForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        alert("¡Ticket enviado con éxito! Se procesará su solicitud a la brevedad.");
-        supportForm.reset();
-    });
-
-    // --- ALERTA DE CONFIRMACIÓN AL CERRAR SESIÓN ---
-    document.getElementById("btn-logout").addEventListener("click", () => {
-        // Alerta de dificultad antes de salir para evitar accidentes
-        const seguro = confirm("¡Atención! Está a punto de cerrar su sesión de trabajo seguro. ¿Desea abandonar el entorno analítico actual?");
-        if (seguro) {
-            localStorage.removeItem("segep_session"); // Eliminar clave de acceso
-            window.location.reload(); // Recargar para forzar pantalla de bloqueo
-        }
-    });
+    // 7. EVENTO TECLA ENTER EN EL INPUT DE IA
+    const queryInput = document.getElementById("ia-query");
+    if(queryInput) {
+        queryInput.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault(); 
+                procesarIAReal();
+            }
+        });
+    }
 });
 
-/* =========================================================================
-   4. MANEJO DE CONSULTAS A LA IA (ENTORNO LOCAL: NETBEANS)
-   ========================================================================= */
-
-function escribirConsulta(texto) {
-    document.getElementById("ia-query").value = texto;
-}
-
+// ========================================================
+// ORQUESTADOR DE IA CON HISTORIAL REAL (CHAT APILABLE)
+// ========================================================
 async function procesarIAReal() {
     const queryInput = document.getElementById("ia-query");
-    const query = queryInput.value.trim();
-    if (!query) return;
+    const modeloSelect = document.getElementById("ia-model-selector");
+    const rawQuery = queryInput.value.trim();
+    const tipoModelo = modeloSelect.value; 
 
-    const resultsDiv = document.getElementById("ia-results");
-    const loadingDiv = document.getElementById("ia-loading");
-    const textDiv = document.getElementById("ia-text");
-    const tablaDiv = document.getElementById("ia-tabla-contenedor");
-    
-    resultsDiv.classList.add("hidden");
-    loadingDiv.classList.remove("hidden");
-    if (chartInstance) {
-        chartInstance.destroy();
-        chartInstance = null;
-    }
+    if (!rawQuery) return;
+
+    // Guardar la pregunta en la memoria del navegador (Máx 4 últimas interacciones)
+    historialConversacion.push(rawQuery);
+    if (historialConversacion.length > 4) historialConversacion.shift();
+
+    const chatArea = document.querySelector(".ia-chat-area");
+    queryInput.value = ""; // Limpiar input
+
+    // 1. CREAR BURBUJA DEL USUARIO (PREGUNTA)
+    const userBubble = document.createElement("div");
+    userBubble.className = "chat-bubble user-bubble";
+    userBubble.style.alignSelf = "flex-end";
+    userBubble.style.marginBottom = "20px";
+    userBubble.innerHTML = `
+        <div style="display:flex; gap:15px; justify-content: flex-end; align-items: flex-start;">
+            <div class="bubble-content" style="background: var(--primary); color: white; border-radius: var(--radius-md) 0 var(--radius-md) var(--radius-md);">
+                <small style="display:block; font-size:10px; opacity:0.8; margin-bottom:4px; font-weight:700;">MODELO ${tipoModelo.toUpperCase()}</small>
+                ${rawQuery}
+            </div>
+            <div class="bubble-avatar" style="background: var(--text-main);"><i class="fas fa-user"></i></div>
+        </div>
+    `;
+    chatArea.appendChild(userBubble);
+    chatArea.scrollTop = chatArea.scrollHeight;
+
+    // 2. CREAR BURBUJA DE CARGA SKELETON
+    const bubbleId = "aura-resp-" + Date.now();
+    const loadingBubble = document.createElement("div");
+    loadingBubble.className = "chat-bubble aura-bubble full-width";
+    loadingBubble.id = bubbleId;
+    loadingBubble.style.marginBottom = "20px";
+    loadingBubble.innerHTML = `
+        <div style="display:flex; gap:15px; width: 100%;">
+            <div class="bubble-avatar"><i class="fas fa-robot"></i></div>
+            <div class="bubble-content advanced-results" style="width: 100%;">
+                <div class="ia-loading-overlay">
+                    <div class="typing-indicator"><span></span><span></span><span></span></div>
+                    <p class="loading-text" style="color: var(--primary); font-weight: 600; margin-left: 10px;">AURA: Analizando tu consulta y conectando con Azure...</p>
+                </div>
+            </div>
+        </div>
+    `;
+    chatArea.appendChild(loadingBubble);
+    chatArea.scrollTop = chatArea.scrollHeight;
 
     try {
-        // =============================================================
-        // CONFIGURADO PARA TU PRUEBA LOCAL DE HOY EN NETBEANS (PUERTO 8080)
-        // =============================================================
-       const urlAzure = `https://covid-data-unasam-gwb2g3akcea5a0en.brazilsouth-01.azurewebsites.net/api/ia?q=${encodeURIComponent(query)}`;
-        const respuesta = await fetch(urlAzure);
+        // 3. NUEVA LLAMADA API (MÉTODO POST) PARA EVITAR LIMITES DE URL
+        const urlAzure = `https://covid-data-unasam-gwb2g3akcea5a0en.brazilsouth-01.azurewebsites.net/api/ia`; 
+        // Nota: Si aún usas NetBeans en local, cambia a: http://localhost:8080/api/ia
         
-        if (!respuesta.ok) throw new Error(`Error en servidor de Azure: HTTP ${respuesta.status}`);
-
+        const respuesta = await fetch(urlAzure, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                query: rawQuery,
+                tipo: tipoModelo,
+                historial: historialConversacion // Enviamos todo el historial ordenado
+            })
+        });
+        
+        if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
         const paqueteIA = await respuesta.json();
-        
-        loadingDiv.classList.add("hidden");
-        resultsDiv.classList.remove("hidden");
-
         if (paqueteIA.error) throw new Error(paqueteIA.error);
 
-        // A. Imprimir análisis de Lucía/AURA
-        textDiv.innerHTML = `<strong><i class="fas fa-brain" style="color: var(--primary);"></i> AURA:</strong> ${paqueteIA.analisis}`;
-
-        // B. Crear tabla dinámica con formato monetario para Soles
+        // 4. PREPARAR DATOS Y TABLA
         const datos = paqueteIA.datos;
-        if (!datos || datos.length === 0) {
-            tablaDiv.innerHTML = "<p style='padding: 20px;'>Consulta sin registros coincidentes.</p>";
-            document.getElementById('ia-chart-container').style.display = 'none';
-            return;
-        }
+        let htmlTabla = "";
+        let hasData = datos && datos.length > 0;
+        let columnas = [];
 
-        const columnas = Object.keys(datos[0]);
-        let htmlTabla = "<table class='tabla-ia'><thead><tr>";
-        columnas.forEach(col => htmlTabla += `<th>${col.replace(/_/g, ' ').toUpperCase()}</th>`);
-        htmlTabla += "</tr></thead><tbody>";
-        
-        const formatoMoneda = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' });
-
-        datos.forEach(fila => { 
-            htmlTabla += "<tr>"; 
-            columnas.forEach(col => {
-                let valor = fila[col];
-                if (typeof valor === 'number' && 
-                    (col.toLowerCase().includes('monto') || col.toLowerCase().includes('total') || 
-                     col.toLowerCase().includes('pim') || col.toLowerCase().includes('pia') || 
-                     col.toLowerCase().includes('devengado') || col.toLowerCase().includes('girado'))) {
-                    valor = formatoMoneda.format(valor);
-                }
-                htmlTabla += `<td>${valor}</td>`;
-            }); 
-            htmlTabla += "</tr>"; 
-        });
-        htmlTabla += "</tbody></table>";
-        tablaDiv.innerHTML = htmlTabla;
-
-        // C. Crear Gráfico adaptado cromáticamente al tema activo
-        if (columnas.length >= 2) {
-            document.getElementById('ia-chart-container').style.display = 'block';
-            const ctx = document.getElementById('ia-canvas').getContext('2d');
-            
-            const etiquetas = datos.map(item => item[columnas[0]]);
-            const valores = datos.map(item => item[columnas[columnas.length - 1]]);
-
-            const paletaColores = [
-                'rgba(37, 99, 235, 0.75)', 'rgba(139, 92, 246, 0.75)', 
-                'rgba(16, 185, 129, 0.75)', 'rgba(245, 158, 11, 0.75)', 
-                'rgba(239, 68, 68, 0.75)', 'rgba(6, 182, 212, 0.75)'
-            ];
-
-            const colorTextoDinamico = getComputedStyle(document.documentElement).getPropertyValue('--text-main').trim();
-
-            chartInstance = new Chart(ctx, {
-                type: paqueteIA.grafico,
-                data: {
-                    labels: etiquetas,
-                    datasets: [{
-                        label: columnas[columnas.length - 1].replace(/_/g, ' ').toUpperCase(),
-                        data: valores,
-                        backgroundColor: paqueteIA.grafico === 'bar' || paqueteIA.grafico === 'line' ? 'rgba(37, 99, 235, 0.7)' : paletaColores,
-                        borderColor: 'rgba(37, 99, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { labels: { color: colorTextoDinamico } } },
-                    scales: paqueteIA.grafico === 'bar' || paqueteIA.grafico === 'line' ? {
-                        x: { ticks: { color: colorTextoDinamico } },
-                        y: { ticks: { color: colorTextoDinamico } }
-                    } : {}
-                }
-            });
+        if (!hasData) {
+            htmlTabla = "<p style='padding:20px; color: var(--text-muted);'>La consulta no arrojó registros coincidentes.</p>";
         } else {
-            document.getElementById('ia-chart-container').style.display = 'none';
+            columnas = Object.keys(datos[0]);
+            htmlTabla = "<table class='tabla-ia'><thead><tr>";
+            columnas.forEach(col => htmlTabla += `<th>${col.replace(/_/g, ' ').toUpperCase()}</th>`);
+            htmlTabla += "</tr></thead><tbody>";
+            const formatoMoneda = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' });
+
+            datos.forEach(fila => { 
+                htmlTabla += "<tr>"; 
+                columnas.forEach(col => {
+                    let valor = fila[col];
+                    if (typeof valor === 'number' && (col.toLowerCase().includes('monto') || col.toLowerCase().includes('total') || col.toLowerCase().includes('brecha') || col.toLowerCase().includes('devengado'))) {
+                        valor = formatoMoneda.format(valor);
+                    }
+                    htmlTabla += `<td>${valor}</td>`;
+                }); 
+                htmlTabla += "</tr>"; 
+            });
+            htmlTabla += "</tbody></table>";
         }
+
+        // 5. REEMPLAZAR LA BURBUJA DE CARGA CON LA RESPUESTA FINAL
+        const canvasId = "canvas-" + Date.now();
+        const finalContent = document.getElementById(bubbleId);
+        
+        finalContent.innerHTML = `
+            <div style="display:flex; gap:15px; width: 100%;">
+                <div class="bubble-avatar"><i class="fas fa-robot"></i></div>
+                <div class="bubble-content advanced-results" style="width: 100%;" id="export-${bubbleId}">
+                    
+                    <div class="result-actions">
+                        <button onclick="exportarReporteUnico('export-${bubbleId}')" class="btn-sm-outline"><i class="fas fa-file-pdf"></i> Imprimir Reporte</button>
+                    </div>
+
+                    <div class="result-section card-inner">
+                        <div class="section-badge"><i class="fas fa-brain"></i> Análisis Contextual</div>
+                        <div class="ia-analysis-text" style="text-align: justify;"><strong>AURA:</strong> ${paqueteIA.analisis}</div>
+                    </div>
+
+                    <div class="ia-visuals">
+                        <div class="result-section card-inner table-box">
+                            <div class="section-badge"><i class="fas fa-table"></i> Datos Estructurados</div>
+                            <div class="ia-table-wrapper">${htmlTabla}</div>
+                        </div>
+                        ${hasData && columnas.length >= 2 ? `
+                        <div class="result-section card-inner chart-box">
+                            <div class="section-badge"><i class="fas fa-chart-bar"></i> Visualización Dinámica</div>
+                            <div class="ia-chart-wrapper"><canvas id="${canvasId}"></canvas></div>
+                        </div>` : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // 6. DIBUJAR GRÁFICO INDEPENDIENTE
+        if (hasData && columnas.length >= 2) {
+            setTimeout(() => {
+                const ctx = document.getElementById(canvasId).getContext('2d');
+                const colorTexto = getComputedStyle(document.documentElement).getPropertyValue('--text-main').trim();
+                const paletaColores = ['rgba(15, 108, 189, 0.8)', 'rgba(16, 124, 16, 0.8)', 'rgba(168, 85, 247, 0.8)', 'rgba(245, 166, 35, 0.8)', 'rgba(209, 52, 56, 0.8)'];
+                
+                const tipoGrafico = paqueteIA.grafico || 'bar';
+
+                new Chart(ctx, {
+                    type: tipoGrafico,
+                    data: {
+                        labels: datos.map(item => item[columnas[0]]),
+                        datasets: [{
+                            label: columnas[columnas.length - 1].replace(/_/g, ' ').toUpperCase(),
+                            data: datos.map(item => item[columnas[columnas.length - 1]]),
+                            backgroundColor: (tipoGrafico === 'pie' || tipoGrafico === 'doughnut') ? paletaColores : 'rgba(15, 108, 189, 0.7)',
+                            borderColor: 'rgba(15, 108, 189, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: colorTexto } } },
+                        scales: (tipoGrafico === 'bar' || tipoGrafico === 'line') ? {
+                            x: { ticks: { color: colorTexto } },
+                            y: { ticks: { color: colorTexto } }
+                        } : {}
+                    }
+                });
+            }, 100); 
+        }
+
+        chatArea.scrollTop = chatArea.scrollHeight;
 
     } catch (error) {
-        loadingDiv.classList.add("hidden");
-        resultsDiv.classList.remove("hidden");
-        tablaDiv.innerHTML = "";
-        document.getElementById('ia-chart-container').style.display = 'none';
-        textDiv.innerHTML = `<span style="color:#EF4444;"><i class="fas fa-exclamation-triangle"></i> <strong>Error local:</strong> ${error.message}. ¿NetBeans está ejecutando el proyecto en el puerto 8080?</span>`;
+        const finalContent = document.getElementById(bubbleId);
+        finalContent.innerHTML = `
+            <div style="display:flex; gap:15px; width: 100%;">
+                <div class="bubble-avatar" style="background: var(--danger);"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="bubble-content" style="border: 1px solid var(--danger); color: var(--danger); width: 100%;">
+                    <strong>Error de Conexión:</strong> ${error.message}. Verifica tu backend.
+                </div>
+            </div>
+        `;
+        chatArea.scrollTop = chatArea.scrollHeight;
     }
 }
 
-/* =========================================================================
-   5. EXPORTACIÓN A PDF
-   ========================================================================= */
-function exportarPDF() {
-    const elemento = document.getElementById("ia-results");
-    const opciones = {
-        margin:       15,
-        filename:     'Reporte_Auditoria_SEGEP.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
+// ========================================================
+// REPARACIÓN DEFINITIVA DEL PDF (CERO CORTES)
+// ========================================================
+
+// 1. Exportar Solo la Respuesta Actual (Centrada y Apilada)
+function exportarReporteUnico(elementId) {
+    const elemento = document.getElementById(elementId);
+    if (!elemento) return;
+
+    // Ocultar botones
+    const actions = elemento.querySelector(".result-actions");
+    if (actions) actions.style.display = 'none';
+
+    // TRUCO MAESTRO: Forzar a que la tabla y el gráfico se apilen verticalmente (Adiós Grid)
+    const visuales = elemento.querySelector(".ia-visuals");
+    let originalDisplay = "";
+    if (visuales) {
+        originalDisplay = visuales.style.display;
+        visuales.style.display = "flex";
+        visuales.style.flexDirection = "column";
+        visuales.style.gap = "20px";
+    }
+
+    // Estilos seguros para A4
+    const originalBackground = elemento.style.background;
+    elemento.style.background = "#ffffff";
+    elemento.style.padding = "30px";
+    elemento.style.width = "800px"; // Ancho exacto simulado para A4 Portrait
+
+    const opt = {
+        margin:       10,
+        filename:     'SEGEP_Auditoria_Individual.pdf',
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
-    html2pdf().set(opciones).from(elemento).save();
+
+    html2pdf().set(opt).from(elemento).save().then(() => {
+        // Restaurar pantalla
+        if (actions) actions.style.display = 'flex';
+        if (visuales) visuales.style.display = originalDisplay;
+        elemento.style.background = originalBackground;
+        elemento.style.padding = "";
+        elemento.style.width = "100%";
+    });
+}
+
+// 2. Exportar TODO EL CHAT (Centrado y Apilado)
+function exportarChatCompleto() {
+    const chatContainer = document.querySelector(".ia-chat-area");
+    
+    // Guardar estado original
+    const originalHeight = chatContainer.style.height;
+    const originalOverflow = chatContainer.style.overflowY;
+    const originalBg = chatContainer.style.background;
+    
+    // TRUCO MAESTRO MULTIPLE: Convertir todos los grids en columnas verticales
+    const todosVisuales = chatContainer.querySelectorAll('.ia-visuals');
+    todosVisuales.forEach(v => {
+        v.dataset.display = v.style.display || "";
+        v.style.display = 'flex';
+        v.style.flexDirection = 'column';
+    });
+    
+    // Preparar contenedor global
+    chatContainer.style.height = "auto";
+    chatContainer.style.overflowY = "visible";
+    chatContainer.style.background = "#ffffff";
+    chatContainer.style.padding = "40px";
+    chatContainer.style.width = "1000px"; 
+    
+    document.body.style.overflow = "hidden";
+
+    const opt = {
+        margin:       15,
+        filename:     'SEGEP_Historial_Completo.pdf',
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(chatContainer).save().then(() => {
+        // Restaurar contenedor global
+        chatContainer.style.height = originalHeight;
+        chatContainer.style.overflowY = originalOverflow;
+        chatContainer.style.background = originalBg;
+        chatContainer.style.padding = "25px";
+        chatContainer.style.width = "100%";
+        document.body.style.overflow = "auto";
+        
+        // Restaurar grids
+        todosVisuales.forEach(v => {
+            v.style.display = v.dataset.display;
+            v.style.flexDirection = '';
+        });
+    });
 }

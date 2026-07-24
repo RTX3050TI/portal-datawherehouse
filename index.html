@@ -17,20 +17,35 @@
     <!-- ================= PANTALLA DE LOGIN MODO ENTERPRISE ================= -->
     <div id="login-screen" class="login-container">
         <div class="login-split-card glass-panel">
-            <!-- Lado Ilustrativo -->
+            
+            <!-- Lado Ilustrativo (IZQUIERDA) -->
             <div class="login-illustration">
                 <div class="brand-badge"><i class="fas fa-shield-alt"></i> Seguridad Azure</div>
                 <div class="illustration-content">
                     <h1>Data Warehouse & AI</h1>
                     <p>Acceso seguro al núcleo de Inteligencia de Negocios para la evaluación del gasto COVID-19.</p>
+                    
+                    <!-- NUEVO: FOTOS LADO IZQUIERDO (Facultad y Escuela) -->
+                    <div style="display: flex; gap: 20px; margin-top: 30px; justify-content: center; position: relative; z-index: 10;">
+                        <!-- Cambia el src por tu foto de la Facultad -->
+                        <img src="https://scontent.fchm1-1.fna.fbcdn.net/v/t39.30808-6/449743815_1898335550974224_8477485390597526494_n.jpg?stp=dst-jpg_tt6&cstp=mx2000x2000&ctp=s2000x2000&_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGbO0hupyU7FvocDEuqCZSIAcCGOCOCDBsBwIY4I4IMG_IxzXjSx9quzHjB61HuDYHn40tAOYpZ2Y3BrG_Svn1C&_nc_ohc=__fJB2R2zTIQ7kNvwFhsQY_&_nc_oc=Adp8d38Dc2me_tY-QBkozqzAKsF3UWttY4oKJWcYPFUStTUh_4mcB_eFXuLbH8NvFRRHg2GLCGRmWhB1-fElsFP0&_nc_zt=23&_nc_ht=scontent.fchm1-1.fna&_nc_gid=d4JrFvpExu7j7asdx8D3Xw&_nc_ss=7b2a8&oh=00_AQBokun29jralGzn3WFRngAw746Hd8UuHIG0vLhAlOLOOw&oe=6A6981CC" alt="Facultad FISI" style="width: 140px; height: 140px; object-fit: cover; border-radius: 12px; border: 3px solid rgba(255,255,255,0.4); box-shadow: 0 8px 16px rgba(0,0,0,0.2);">
+                        <!-- Cambia el src por tu foto de la Escuela -->
+                        <img src="https://scontent.fchm1-1.fna.fbcdn.net/v/t39.30808-6/505604364_24059384183674528_5939386385599285204_n.jpg?stp=dst-jpg_tt6&cstp=mx720x705&ctp=s720x705&_nc_cat=101&ccb=1-7&_nc_sid=cf85f3&_nc_eui2=AeHDm73DlZ5RvLJbGw2PqAmRJwW0nxau1bwnBbSfFq7VvIiOpgZvyXMsLqp_yyOOsnFqyx29vsFNdkVta1H5WDtu&_nc_ohc=A0N7noDC1pAQ7kNvwEvu5ZB&_nc_oc=AdpHU8vN8rJkjvefs6OXz11uVJD7okC_k8t1PUL7up7crnrnQJt4u6bJ1bG-W3cmjY_kdVmjXkuAPBfWdrtR31Be&_nc_zt=23&_nc_ht=scontent.fchm1-1.fna&_nc_gid=P8SlY02zzrB5pMv9tSloiQ&_nc_ss=7b2a8&oh=00_AQBOFU30iPG37CLp8Gl_LsIrDHTVRBKews6_HgsZWemT7A&oe=6A696BD6" alt="Escuela EPISI" style="width: 140px; height: 140px; object-fit: cover; border-radius: 12px; border: 3px solid rgba(255,255,255,0.4); box-shadow: 0 8px 16px rgba(0,0,0,0.2);">
+                    </div>
+
                     <div class="hologram-effect"></div>
                 </div>
             </div>
             
-            <!-- Lado Formulario -->
+            <!-- Lado Formulario (DERECHA) -->
             <div class="login-box">
                 <div class="login-header">
-                    <div class="logo-circle"><i class="fas fa-chart-pie"></i></div>
+                    <!-- NUEVO: FOTO LADO DERECHO (UNASAM) -->
+                    <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+                        <!-- Cambia el src por tu foto de la UNASAM -->
+                        <img src="https://www.unasam.edu.pe/img/unasam.png" alt="UNASAM" style="width: 140px; height: 140px; object-fit: cover; border-radius: 12px; border: 3px solid rgba(0, 90, 158, 0.2); box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
+                    </div>
+                    
                     <h2>Bienvenido a SEGEP</h2>
                     <p data-lang="login-subtitle">Inteligencia de Negocios Corporativa</p>
                 </div>
@@ -89,7 +104,6 @@
                 <button class="nav-btn ripple" data-target="view-ia">
                     <i class="fas fa-robot"></i> <span data-lang="nav-ia">Asistente IA</span>
                     <span class="badge-new">PRO</span>
-                </button>
                 </button>
                 <!-- NUEVO BOTÓN ACERCA DE -->
                 <button class="nav-btn ripple" data-target="view-about">
@@ -163,84 +177,50 @@
                         <button class="btn-outline ripple"><i class="fas fa-sync-alt"></i> Actualizar DW</button>
                     </div>
 
-                    <!-- NUEVO: DASHBOARD OVERVIEW & KPIS -->
-                    <div class="dashboard-overview">
-                        <h3 class="section-subtitle">Resumen Ejecutivo General</h3>
-                        <div class="kpi-grid">
-                            <div class="kpi-card card">
-                                <div class="kpi-icon bg-blue"><i class="fas fa-wallet"></i></div>
-                                <div class="kpi-data">
-                                    <span>Presupuesto (PIM)</span>
-                                    <h4>S/ 4.2 Billones</h4>
-                                    <div class="kpi-trend positive"><i class="fas fa-arrow-up"></i> +12% vs 2024</div>
-                                </div>
-                            </div>
-                            <div class="kpi-card card">
-                                <div class="kpi-icon bg-green"><i class="fas fa-check-circle"></i></div>
-                                <div class="kpi-data">
-                                    <span>Devengado</span>
-                                    <h4>S/ 3.8 Billones</h4>
-                                    <div class="progress-bar-kpi"><div class="fill bg-green" style="width: 85%;"></div></div>
-                                </div>
-                            </div>
-                            <div class="kpi-card card">
-                                <div class="kpi-icon bg-purple"><i class="fas fa-hand-holding-usd"></i></div>
-                                <div class="kpi-data">
-                                    <span>Girado Efectivo</span>
-                                    <h4>S/ 3.5 Billones</h4>
-                                    <div class="progress-bar-kpi"><div class="fill bg-purple" style="width: 78%;"></div></div>
-                                </div>
-                            </div>
-                            <div class="kpi-card card">
-                                <div class="kpi-icon bg-orange"><i class="fas fa-building"></i></div>
-                                <div class="kpi-data">
-                                    <span>Entidades Activas</span>
-                                    <h4>142</h4>
-                                    <span class="kpi-label">Pliegos Ejecutores</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="bi-layout-split">
-                        <!-- PANEL LATERAL: PREGUNTAS (AHORA ACORDEONES) -->
+                        <!-- PANEL LATERAL: PREGUNTAS (ACORDEONES QUE CAMBIAN PÁGINAS) -->
                         <div class="bi-questions-sidebar card">
                             <h3 class="sidebar-title"><i class="fas fa-project-diagram"></i> Temas Analíticos</h3>
                             
+                            <!-- TEMA 1 -->
                             <details class="theme-accordion" open>
-                                <summary>1. Ejecución General <span class="badge">2</span></summary>
+                                <summary class="tema-btn active" data-page="8fdf16155a01d808be5d">1. Ejecución General <span class="badge">2</span></summary>
                                 <div class="accordion-content">
                                     <div class="question-card"><i class="fas fa-search-dollar"></i> ¿Cuál es el presupuesto PIM frente al devengado?</div>
                                     <div class="question-card"><i class="fas fa-chart-bar"></i> ¿Cuál es el avance histórico mensual por producto?</div>
                                 </div>
                             </details>
 
+                            <!-- TEMA 2 -->
                             <details class="theme-accordion">
-                                <summary>2. Análisis de Brechas <span class="badge">2</span></summary>
+                                <summary class="tema-btn" data-page="ReportSection2">2. Análisis de Brechas <span class="badge">2</span></summary>
                                 <div class="accordion-content">
                                     <div class="question-card"><i class="fas fa-exclamation-circle"></i> ¿A cuánto asciende la brecha por función?</div>
                                     <div class="question-card"><i class="fas fa-map-marked-alt"></i> ¿Qué distritos presentan mayor ineficiencia?</div>
                                 </div>
                             </details>
 
+                            <!-- TEMA 3 -->
                             <details class="theme-accordion">
-                                <summary>3. Ciclo de Gasto <span class="badge">2</span></summary>
+                                <summary class="tema-btn" data-page="ReportSection3">3. Ciclo de Gasto <span class="badge">2</span></summary>
                                 <div class="accordion-content">
                                     <div class="question-card"><i class="fas fa-random"></i> ¿Cuál es el flujo de certificación a girado?</div>
                                     <div class="question-card"><i class="fas fa-pause-circle"></i> ¿En qué tipos de gasto se estancan los compromisos?</div>
                                 </div>
                             </details>
 
+                            <!-- TEMA 4 -->
                             <details class="theme-accordion">
-                                <summary>4. Dinámica Territorial <span class="badge">2</span></summary>
+                                <summary class="tema-btn" data-page="ReportSection4">4. Dinámica Territorial <span class="badge">2</span></summary>
                                 <div class="accordion-content">
                                     <div class="question-card"><i class="fas fa-map"></i> ¿Cómo se concentra el volumen a nivel provincial?</div>
                                     <div class="question-card"><i class="fas fa-flag"></i> ¿Qué regiones lideran la certificación?</div>
                                 </div>
                             </details>
 
+                            <!-- TEMA 5 -->
                             <details class="theme-accordion">
-                                <summary>5. Estratégico COVID-19 <span class="badge">2</span></summary>
+                                <summary class="tema-btn" data-page="ReportSection5">5. Estratégico COVID-19 <span class="badge">2</span></summary>
                                 <div class="accordion-content">
                                     <div class="question-card"><i class="fas fa-hospital-user"></i> ¿Qué entidades lideraron la ejecución en pandemia?</div>
                                     <div class="question-card"><i class="fas fa-briefcase-medical"></i> ¿Cuáles fueron los servicios de salud con mayor gasto?</div>
@@ -250,17 +230,9 @@
 
                         <!-- CONTENEDOR DERECHO: POWER BI -->
                         <div class="bi-container-right card">
-                            <!-- NUEVO: FILTROS RÁPIDOS VISUALES -->
-                            <div class="bi-filters-bar">
-                                <div class="filter-item"><i class="fas fa-calendar"></i> <select><option>Año: Todos</option><option>2026</option></select></div>
-                                <div class="filter-item"><i class="fas fa-map-marker-alt"></i> <select><option>Dept: Todos</option><option>Áncash</option></select></div>
-                                <div class="filter-item"><i class="fas fa-landmark"></i> <select><option>Entidad: Todas</option></select></div>
-                                <div class="filter-item"><i class="fas fa-file-invoice-dollar"></i> <select><option>Fuente: Todas</option></select></div>
-                            </div>
-                            
                             <div class="iframe-wrapper">
-                                <!-- Reemplaza src="" con tu enlace web de Power BI -->
-                            <iframe title="powerbi" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiMWRjOWVmMDctYmRhZi00OWNhLTk3ZDEtYjRiMzQ2NGFjYjQ2IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9&pageName=8fdf16155a01d808be5d" frameborder="0" allowFullScreen="true"></iframe></div>
+<!-- Reemplaza tu iframe actual por este: -->
+<iframe title="dashboard bi" style="width: 100%; height: 100%; border: none;" src="https://app.powerbi.com/view?r=eyJrIjoiY2Y4OWVlMzEtYzYzYi00NWEwLThlZTItMTIxOWI5ZTEwNmEyIiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9" allowFullScreen="true"></iframe>                            </div>
                         </div>
                     </div>
                 </section>
@@ -291,8 +263,7 @@
                             </div>
                         </div>
 
-                        <!-- NUEVO SELECTOR DE MODELOS: Estilo Items/Cards en lugar de lista desplegable -->
-                        <!-- Mantenemos el ID original en un input oculto para no romper tu JS -->
+                        <!-- NUEVO SELECTOR DE MODELOS -->
                         <div class="ia-model-cards-wrapper">
                             <span class="model-label">Motor de Análisis:</span>
                             <input type="hidden" id="ia-model-selector" value="descriptivo">
@@ -418,35 +389,47 @@
                             </div>
                         </div>
 
-                        <!-- TARJETA 2: EQUIPO DE DESARROLLO -->
+                 <!-- TARJETA 2: EQUIPO DE DESARROLLO -->
                         <div class="card">
                             <div class="card-inner" style="padding: 25px;">
                                 <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 18px;"><i class="fas fa-users"></i> Equipo de Desarrollo (UNASAM)</h3>
                                 
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px;">
                                     
-                                    <!-- Integrante 1 -->
-                                    <div style="border: 1px solid var(--border); padding: 20px; border-radius: var(--radius-md); background: var(--background); transition: 0.3s; box-shadow: var(--shadow-soft);">
-                                        <h4 style="color: var(--text-main); font-size: 16px; margin-bottom: 5px;">Leyto Andrés Paucar Rosas</h4>
+                                    <!-- Integrante 1: DELEGADO -->
+                                    <div style="border: 1px solid var(--border); padding: 20px; border-radius: var(--radius-md); background: var(--background); transition: 0.3s; box-shadow: var(--shadow-soft); border-top: 3px solid #FFC107;">
+                                        <h4 style="color: var(--text-main); font-size: 15px; margin-bottom: 5px;">Jherson Chinchay Loli <i class="fas fa-star" style="color: #FFC107;" title="Delegado"></i></h4>
+                                        <span style="display: block; font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Delegado del Proyecto / Analista BI</span>
+                                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;"><i class="fas fa-envelope" style="width: 20px;"></i> jchinchayl@unasam.edu.pe</div>
+                                    </div>
+
+                                    <!-- Integrante 2: LEYTO -->
+                                    <div style="border: 1px solid var(--border); padding: 20px; border-radius: var(--radius-md); background: var(--background); transition: 0.3s; box-shadow: var(--shadow-soft); border-top: 3px solid #005A9E;">
+                                        <h4 style="color: var(--text-main); font-size: 15px; margin-bottom: 5px;">Leyto Andres Paucar Rosas</h4>
                                         <span style="display: block; font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Ingeniero de Datos / Backend</span>
-                                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;"><i class="fas fa-envelope" style="width: 20px;"></i> leyto@unasam.edu.pe</div>
-                                        <div style="font-size: 13px; color: var(--text-muted);"><i class="fas fa-code-branch" style="width: 20px;"></i> SQL Server, Java API, Frontend</div>
+                                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;"><i class="fas fa-envelope" style="width: 20px;"></i> lpaucarr@unasam.edu.pe</div>
+                                        <div style="font-size: 13px; color: var(--text-muted);"><i class="fas fa-code-branch" style="width: 20px;"></i> SQL Server, Java API</div>
                                     </div>
 
-                                    <!-- Integrante 2 -->
+                                    <!-- Integrante 3 -->
                                     <div style="border: 1px solid var(--border); padding: 20px; border-radius: var(--radius-md); background: var(--background); transition: 0.3s; box-shadow: var(--shadow-soft);">
-                                        <h4 style="color: var(--text-main); font-size: 16px; margin-bottom: 5px;">[Nombre del Integrante 2]</h4>
-                                        <span style="display: block; font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Analista BI / Documentación</span>
-                                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;"><i class="fas fa-envelope" style="width: 20px;"></i> correo2@unasam.edu.pe</div>
-                                        <div style="font-size: 13px; color: var(--text-muted);"><i class="fas fa-code-branch" style="width: 20px;"></i> Power BI, Modelado Dimensional</div>
+                                        <h4 style="color: var(--text-main); font-size: 15px; margin-bottom: 5px;">Jangs Darwin Cadillo Palmadera</h4>
+                                        <span style="display: block; font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Analista de Requerimientos</span>
+                                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;"><i class="fas fa-envelope" style="width: 20px;"></i> jcadillop@unasam.edu.pe</div>
                                     </div>
 
-                                    <!-- Integrante 3 (Si son más, solo copia y pega este bloque) -->
+                                    <!-- Integrante 4 -->
                                     <div style="border: 1px solid var(--border); padding: 20px; border-radius: var(--radius-md); background: var(--background); transition: 0.3s; box-shadow: var(--shadow-soft);">
-                                        <h4 style="color: var(--text-main); font-size: 16px; margin-bottom: 5px;">[Nombre del Integrante 3]</h4>
-                                        <span style="display: block; font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Especialista UX / Tester</span>
-                                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;"><i class="fas fa-envelope" style="width: 20px;"></i> correo3@unasam.edu.pe</div>
-                                        <div style="font-size: 13px; color: var(--text-muted);"><i class="fas fa-code-branch" style="width: 20px;"></i> Testing, Casos de Uso</div>
+                                        <h4 style="color: var(--text-main); font-size: 15px; margin-bottom: 5px;">Fredy Benito Obregon Obregon</h4>
+                                        <span style="display: block; font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Desarrollador Frontend</span>
+                                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;"><i class="fas fa-envelope" style="width: 20px;"></i> fobregono@unasam.edu.pe</div>
+                                    </div>
+
+                                    <!-- Integrante 5 -->
+                                    <div style="border: 1px solid var(--border); padding: 20px; border-radius: var(--radius-md); background: var(--background); transition: 0.3s; box-shadow: var(--shadow-soft);">
+                                        <h4 style="color: var(--text-main); font-size: 15px; margin-bottom: 5px;">Erick Jhonson Rupary Dominguez</h4>
+                                        <span style="display: block; font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Especialista en Pruebas (QA)</span>
+                                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;"><i class="fas fa-envelope" style="width: 20px;"></i> eruparyd@unasam.edu.pe</div>
                                     </div>
 
                                 </div>

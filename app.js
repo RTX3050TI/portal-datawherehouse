@@ -460,3 +460,149 @@ function exportarChatCompleto() {
         });
     });
 }
+
+// ========================================================
+// NAVEGACIÓN DINÁMICA DE POWER BI (IFRAME)
+// ========================================================
+document.addEventListener("DOMContentLoaded", () => {
+    const iframeBI = document.getElementById("powerbi-iframe");
+    const botonesTemas = document.querySelectorAll(".tema-btn");
+    const acordeones = document.querySelectorAll(".theme-accordion");
+    
+    // Tu enlace base estricto (sin el parámetro pageName)
+   // Tu enlace base estricto (NUEVO ENLACE)
+    const enlaceBaseBI = "https://app.powerbi.com/view?r=eyJrIjoiNzgyNzcxYTctNzkwNS00MTYyLTkyMzgtMTAyMWI3YzAxYjM4IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9";
+    botonesTemas.forEach(boton => {
+        boton.addEventListener("click", function(e) {
+            
+            // Cerrar otros acordeones visualmente (Opcional, hace que se vea más limpio)
+            acordeones.forEach(acc => {
+                if(acc !== this.parentElement) {
+                    acc.removeAttribute("open");
+                }
+            });
+
+            // Resaltar el botón activo
+            botonesTemas.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            // Cambiar la página en el iframe
+            const codigoPagina = this.getAttribute("data-page");
+            if (iframeBI && codigoPagina) {
+                iframeBI.src = `${enlaceBaseBI}&pageName=${codigoPagina}`;
+            }
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. Detectar cambios en los radio buttons del Motor IA
+    const modelRadios = document.querySelectorAll('input[name="ia_model"]');
+    
+    modelRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            mostrarMensajeDocente(e.target.value);
+        });
+    });
+
+    // 2. Detectar cuando se hace clic en la caja de texto para preguntar
+    const inputChat = document.getElementById("ia-query");
+    if(inputChat) {
+        inputChat.addEventListener('focus', () => {
+            const modeloActual = document.getElementById('ia-model-selector').value;
+            if(modeloActual === 'predictivo' || modeloActual === 'prescriptivo') {
+                mostrarMensajeDocente(modeloActual);
+            }
+        }, { once: true }); // El evento focus solo saltará 1 vez para no ser molesto
+    }
+});
+
+// ======================================================================
+// LÓGICA DE EXPLICACIÓN DE MODELOS PARA EL JURADO (MANIPULACIÓN DOM)
+// ======================================================================
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. Capturamos los botones de los modelos de IA
+    const modelRadios = document.querySelectorAll('input[name="ia_model"]');
+    
+    // 2. Escuchamos el evento 'change' (cuando el usuario hace clic en un modelo)
+    modelRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            mostrarAlertaDocente(e.target.value);
+        });
+    });
+
+    // 3. Función principal para crear e inyectar el mensaje en el DOM
+    function mostrarAlertaDocente(modelo) {
+        
+        // Paso A: Limpiar el DOM. Si ya hay una alerta en pantalla, la eliminamos.
+        let oldAlert = document.getElementById("alerta-jurado");
+        if (oldAlert) {
+            oldAlert.remove();
+        }
+
+        // Paso B: Crear el nuevo contenedor desde cero usando el DOM
+        const alerta = document.createElement("div");
+        alerta.id = "alerta-jurado";
+        alerta.style.position = "fixed";
+        alerta.style.bottom = "30px";
+        alerta.style.right = "30px";
+        alerta.style.backgroundColor = "#ffffff";
+        alerta.style.boxShadow = "0 10px 25px rgba(0,0,0,0.2)";
+        alerta.style.padding = "20px";
+        alerta.style.borderRadius = "8px";
+        alerta.style.zIndex = "9999";
+        alerta.style.maxWidth = "350px";
+        alerta.style.transform = "translateX(120%)"; // Oculto a la derecha inicialmente
+        alerta.style.transition = "transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+        alerta.style.fontFamily = "'Inter', 'Segoe UI', sans-serif";
+
+        // Paso C: Definir los textos y colores según el modelo seleccionado
+        let titulo = "";
+        let texto = "";
+
+        if (modelo === "descriptivo") {
+            titulo = "📊 Modelo Descriptivo (Estable)";
+            texto = "AURA procesará consultas SQL exactas sobre el historial (2020-2025). <br><br><strong>Manejo de Errores:</strong> Este modelo es 100% robusto. Al no requerir proyecciones externas de IA, no es afectado por caídas de red.";
+            alerta.style.borderLeft = "5px solid #107C10"; // Verde (Seguro)
+        } 
+        else if (modelo === "predictivo") {
+            titulo = "📈 Modelo Predictivo (IA Gemini)";
+            texto = "Conectando con la API de inteligencia artificial en la nube. <br><br><strong>Manejo de Errores:</strong> Si el servidor sufre alta demanda (Error 503), el sistema interceptará la caída para evitar pantallas rojas y responderá de forma controlada.";
+            alerta.style.borderLeft = "5px solid #FFC107"; // Amarillo (Precaución)
+        } 
+        else if (modelo === "prescriptivo") {
+            titulo = "🎯 Modelo Prescriptivo (Estrategia)";
+            texto = "Generando planes de acción mediante análisis avanzado. <br><br><strong>Manejo de Errores:</strong> El sistema aplica resiliencia (Try-Catch en Java). Si los datos no encajan con la sugerencia, AURA se autoprotege manteniendo el Data Warehouse intacto.";
+            alerta.style.borderLeft = "5px solid #005A9E"; // Azul (Info)
+        }
+
+        // Paso D: Inyectar el contenido HTML dentro de nuestro div creado
+        alerta.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                <h4 style="margin: 0; color: #323130; font-size: 15px; font-weight: 700;">${titulo}</h4>
+                <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: #999; cursor: pointer; font-size: 16px; margin-left: 10px;">&times;</button>
+            </div>
+            <p style="margin: 0; color: #605E5C; font-size: 13px; line-height: 1.5;">${texto}</p>
+        `;
+
+        // Paso E: Adjuntar el elemento al body del documento
+        document.body.appendChild(alerta);
+
+        // Paso F: Activar la animación de entrada (forzamos un pequeño retraso para que el CSS procese)
+        setTimeout(() => {
+            alerta.style.transform = "translateX(0)";
+        }, 50);
+
+        // Paso G: Destruir el elemento automáticamente después de 10 segundos para no estorbar
+        setTimeout(() => {
+            alerta.style.transform = "translateX(120%)";
+            setTimeout(() => {
+                if (alerta.parentNode) {
+                    alerta.remove(); // Limpiamos el DOM
+                }
+            }, 400); 
+        }, 10000);
+    }
+});
